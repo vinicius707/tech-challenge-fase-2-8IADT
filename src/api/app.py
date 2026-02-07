@@ -7,6 +7,8 @@ import json
 from concurrent.futures import ThreadPoolExecutor
 from src.ga import engine, representation
 from src.llm.adapter import LLMAdapter
+from src.viz import map as viz_map
+import csv
 
 app = FastAPI(title="Tech Challenge - Routes Optimization API")
 
@@ -51,6 +53,33 @@ def run_job(job_id: str, cfg: Dict[str, Any], out_dir: str):
                             mutation_rate=cfg.get("mutation_rate", 0.05),
                             weights=weights,
                             out_dir=out_dir)
+        # try to export geojson/html/results from best_solution
+        best_csv = res.get("best")
+        try:
+            # load best_solution.csv
+            routes = []
+            if best_csv and os.path.exists(best_csv):
+                with open(best_csv, newline='', encoding='utf-8') as fh:
+                    reader = csv.DictReader(fh)
+                    for row in reader:
+                        seq = [int(x) for x in row['sequence'].split('|') if x]
+                        routes.append(seq)
+                points = representation.parse_instance_csv(cfg.get("instance"))
+                lookup = representation.build_points_lookup(points)
+                decoded = representation.decode_chromosome(routes, lookup)
+                geojson_obj = viz_map.routes_to_geojson(decoded)
+                geojson_path = os.path.join(out_dir, "routes.geojson")
+                viz_map.save_geojson(geojson_obj, geojson_path)
+                html_path = os.path.join(out_dir, "route_map.html")
+                viz_map.generate_simple_html_map(decoded, html_path)
+                # simple results.csv
+                results_csv = os.path.join(out_dir, "results.csv")
+                with open(results_csv, "w", newline="", encoding="utf-8") as rfh:
+                    rfh.write("total_distance,total_load,vehicles\n0.0,0.0,{}".format(len(decoded)))
+                res["routes_geojson"] = geojson_path
+        except Exception:
+            # non-fatal
+            pass
         jobs = load_jobs()
         jobs[job_id]["status"] = "finished"
         jobs[job_id]["artifacts"] = res
