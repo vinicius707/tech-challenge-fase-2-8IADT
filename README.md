@@ -392,6 +392,10 @@ Clique nas imagens abaixo para abrir os notebooks (links relativos no repositór
 [![Quickstart](docs/images/quickstart.png)](notebooks/quickstart.ipynb)  
 [![Export & Visualize](docs/images/export_visualize.png)](notebooks/export_visualize.ipynb)  
 [![LLM Instructions](docs/images/llm_instructions.png)](notebooks/llm_instructions.ipynb)
+
+## Resultado dos Experimentos (comparativo)
+
+![Compare Results](docs/images/compare_results.png)
  
 ## Status atual do projeto
 
