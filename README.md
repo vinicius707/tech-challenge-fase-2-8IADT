@@ -2,38 +2,36 @@
 
 Este repositório documenta a proposta e as orientações para implementar o Projeto 2: otimização de rotas para distribuição de medicamentos e insumos em contexto hospitalar, usando Algoritmos Genéticos (AG) e integração com LLMs para geração de instruções e relatórios.
 
-> Fonte do enunciado: `8IADT - Fase 2 - Tech challenge (1).pdf`
-
 ## Visão geral
 
 O objetivo é desenvolver um sistema de otimização de rotas (TSP/VRP) adaptado às restrições de um ambiente hospitalar: prioridades de entregas, capacidade dos veículos, autonomia, múltiplos veículos e janelas de tempo, quando aplicável. A solução deve oferecer visualização das rotas e geração de instruções/relatórios em linguagem natural via LLM.
 
 ## Objetivos específicos (Projeto 2)
 
-- Implementar representação genética adequada para rotas (codificação de caminhos).  
-- Projetar operadores genéticos especializados (seleção, crossover, mutação) para TSP/VRP.  
-- Criar função fitness que considere distância, prioridade das entregas, capacidade de carga e autonomia dos veículos.  
-- Incluir restrições realistas: prioridades, capacidades, autonomia, múltiplos veículos (VRP).  
-- Visualizar rotas otimizadas em mapa (HTML/JS) e exportar resultados (CSV/GeoJSON).  
-- Integrar LLM para gerar instruções detalhadas e relatórios de eficiência.  
+- Implementar representação genética adequada para rotas (codificação de caminhos).
+- Projetar operadores genéticos especializados (seleção, crossover, mutação) para TSP/VRP.
+- Criar função fitness que considere distância, prioridade das entregas, capacidade de carga e autonomia dos veículos.
+- Incluir restrições realistas: prioridades, capacidades, autonomia, múltiplos veículos (VRP).
+- Visualizar rotas otimizadas em mapa (HTML/JS) e exportar resultados (CSV/GeoJSON).
+- Integrar LLM para gerar instruções detalhadas e relatórios de eficiência.
 - Realizar ao menos 3 experimentos variando parâmetros do AG e documentar comparativos.
 
 ## Requisitos técnicos (detalhado)
 
-1. Partir do código-base de TSP fornecido e adaptá-lo para o contexto hospitalar.  
-2. Implementar operadores genéticos apropriados para sequências de rota (e.g., order crossover, swap mutation).  
-3. Definir e justificar a função fitness (peso entre distância, prioridade, capacidade, tempo).  
-4. Adicionar logging/monitoramento para experimento (salvar histórico de fitness por geração).  
-5. Gerar visualizações: mapa interativo (folium/kepler.gl) e gráfico de convergência.  
-6. Implementar endpoints mínimos (se optar por API): otimização, status de job, recuperação de rotas.  
+1. Partir do código-base de TSP fornecido e adaptá-lo para o contexto hospitalar.
+2. Implementar operadores genéticos apropriados para sequências de rota (e.g., order crossover, swap mutation).
+3. Definir e justificar a função fitness (peso entre distância, prioridade, capacidade, tempo).
+4. Adicionar logging/monitoramento para experimento (salvar histórico de fitness por geração).
+5. Gerar visualizações: mapa interativo (folium/kepler.gl) e gráfico de convergência.
+6. Implementar endpoints mínimos (se optar por API): otimização, status de job, recuperação de rotas.
 7. Documentar arquitetura, decisões, limitações e resultados no relatório técnico.
 
 ## Entregáveis (Projeto 2)
 
-- Código-fonte modificado a partir do TSP base.  
-- Notebooks/scripts de demonstração (ex.: executar experimento e gerar mapa).  
-- Pasta `experiments/` com resultados (CSV), plots e HTMLs das rotas.  
-- Relatório técnico (metodologia, configurações, métricas e comparativos).  
+- Código-fonte modificado a partir do TSP base.
+- Notebooks/scripts de demonstração (ex.: executar experimento e gerar mapa).
+- Pasta `experiments/` com resultados (CSV), plots e HTMLs das rotas.
+- Relatório técnico (metodologia, configurações, métricas e comparativos).
 - Vídeo de demonstração (até 15 minutos) mostrando: execução, visualização de rotas e exemplo de instrução gerada pela LLM.
 
 ## Instalação e execução (exemplos focados em Projeto 2)
@@ -111,12 +109,12 @@ docker run --rm -v $(pwd)/experiments:/app/experiments tech-challenge-routes:lat
 
 ## Tecnologias e bibliotecas recomendadas
 
-- Python 3.10+  
-- Algoritmos genéticos: implementação própria ou libs auxiliares (de preferência customizada para controle dos operadores).  
-- Grafos/roteamento: `networkx`, `ortools` (opcional para baseline).  
-- Geoprocessamento/visualização: `geopandas`, `shapely`, `folium`, `kepler.gl` (opcional).  
-- Experimentos: `pandas`, `matplotlib`, `seaborn`.  
-- LLMs: `openai` (ou integração com modelo local).  
+- Python 3.10+
+- Algoritmos genéticos: implementação própria ou libs auxiliares (de preferência customizada para controle dos operadores).
+- Grafos/roteamento: `networkx`, `ortools` (opcional para baseline).
+- Geoprocessamento/visualização: `geopandas`, `shapely`, `folium`, `kepler.gl` (opcional).
+- Experimentos: `pandas`, `matplotlib`, `seaborn`.
+- LLMs: `openai` (ou integração com modelo local).
 - API (opcional): `FastAPI` + `uvicorn`.
 
 ## Endpoints sugeridos (API)
@@ -134,17 +132,18 @@ docker run --rm -v $(pwd)/experiments:/app/experiments tech-challenge-routes:lat
 ## Métricas e experimentos
 
 Avalie especialmente:
-- Distância total percorrida.  
-- Tempo estimado (se disponível).  
-- Número de veículos utilizados.  
-- Cumprimento de prioridades (penalidades aplicadas na fitness).  
-- Carga utilizada vs capacidade.  
+
+- Distância total percorrida.
+- Tempo estimado (se disponível).
+- Número de veículos utilizados.
+- Cumprimento de prioridades (penalidades aplicadas na fitness).
+- Carga utilizada vs capacidade.
 
 Organize resultados por experimento em `experiments/{run_id}/results.csv` e inclua `plots/convergence.png` e `route_map.html`.
 
 ## Visualização das rotas
 
-- Gere mapas interativos (folium) e exporte como `route_map.html`.  
+- Gere mapas interativos (folium) e exporte como `route_map.html`.
 - Para análise, exporte `routes.geojson` com propriedades (vehicle_id, sequence, load, priority).
 
 Exemplo rápido (folium):
@@ -158,7 +157,7 @@ m.save('route_map.html')
 
 ## Testes e CI
 
-- Escreva testes unitários para operadores genéticos, função fitness e parsers de instância.  
+- Escreva testes unitários para operadores genéticos, função fitness e parsers de instância.
 - Exemplo de comando:
 
 ```bash
@@ -169,7 +168,7 @@ pytest -q
 
 ## Deploy / Infraestrutura como Código (opcional)
 
-- Se usar nuvem, documente: como executar jobs em batch, armazenamento de artefatos e endpoints.  
+- Se usar nuvem, documente: como executar jobs em batch, armazenamento de artefatos e endpoints.
 - Exemplos: containerizar runner e usar AWS Batch / ECS, ou deploy de API com Fargate.
 
 ## Licença
@@ -182,12 +181,13 @@ MIT License
 
 ## Como contribuir
 
-- Abra issues detalhando bugs/funcionalidades.  
-- Pull requests pequenos com testes e descrição.  
+- Abra issues detalhando bugs/funcionalidades.
+- Pull requests pequenos com testes e descrição.
 - Siga PEP8/PEP257; inclua testes para novas funções.
 
 ---
 
 Se quiser, eu posso agora:
-- gerar `requirements.txt` / `pyproject.toml` com versões recomendadas,  
+
+- gerar `requirements.txt` / `pyproject.toml` com versões recomendadas,
 - criar template de `Dockerfile`, `openapi.yaml` ou um workflow GitHub Actions para rodar testes/experimentos.
