@@ -85,6 +85,165 @@ docker run --rm -v $(pwd)/experiments:/app/experiments tech-challenge-routes:lat
   python -m src.optimize --config experiments/configs/experiment_01.yaml
 ```
 
+## Instalação offline (wheelhouse)
+
+Se você estiver em um ambiente sem acesso à internet, use um wheelhouse (coleção de wheels) criado em outra máquina com conectividade:
+
+1. Em uma máquina com internet, gere as wheels:
+
+```bash
+./scripts/build_wheelhouse.sh python3.10 wheelhouse
+```
+
+2. Transfira o diretório `wheelhouse/` para a máquina offline (via pendrive, scp, etc.).
+
+3. Na máquina offline, instale a partir do wheelhouse:
+
+```bash
+./scripts/install_from_wheelhouse.sh wheelhouse .venv
+```
+
+Observações:
+- Pacotes geoespaciais (GDAL, geopandas, etc.) podem exigir bibliotecas de sistema na máquina alvo (ex.: libgdal). Instale-as antes de instalar os wheels.  
+- Os scripts em `scripts/` são fornecidos para conveniência; torne-os executáveis com `chmod +x scripts/*.sh` antes de usar.
+
+## Dependências de sistema (Ubuntu / macOS / Windows)
+
+Algumas bibliotecas Python geoespaciais (GDAL, geopandas, fiona, shapely) dependem de bibliotecas nativas. Abaixo estão comandos recomendados para preparar ambientes em diferentes sistemas.
+
+Ubuntu / Debian (apt):
+
+```bash
+sudo apt-get update
+sudo apt-get install -y build-essential python3-dev python3-venv \
+  gdal-bin libgdal-dev libpq-dev
+# opcionalmente instalar ferramentas auxiliares
+sudo apt-get install -y libgeos-dev libproj-dev
+```
+
+macOS (Homebrew):
+
+```bash
+# instale Homebrew se não tiver: https://brew.sh
+brew update
+brew install gdal proj geos
+```
+
+Nota importante (macOS):
+
+- Antes de instalar pacotes via Homebrew, certifique-se de que o Xcode Command Line Tools esteja instalado:
+
+```bash
+xcode-select --install
+```
+
+- Em máquinas macOS com Apple Silicon (M1/M2), verifique se o Homebrew está instalado em `/opt/homebrew` e prefira usar pacotes do canal `conda-forge` quando enfrentar problemas binários.
+
+### Checklist pré-execução (macOS)
+
+Antes de instalar dependências ou rodar os scripts, verifique:
+
+- Xcode Command Line Tools instalados:
+
+```bash
+xcode-select --install
+```
+
+- Homebrew disponível e no PATH:
+
+```bash
+brew --version
+```
+
+- Python 3.10+ disponível (ou uso de `poetry`/`conda`):
+
+```bash
+python3 --version
+```
+
+- Se Apple Silicon (M1/M2): confirme Homebrew em `/opt/homebrew` ou prefira `conda-forge`.
+
+- Reinicie o terminal após instalar Homebrew ou alterar PATH.
+
+### Checklist pré-execução (Ubuntu)
+
+Antes de instalar dependências ou rodar os scripts, verifique:
+
+- Atualize índices e tenha apt funcional:
+
+```bash
+sudo apt-get update
+```
+
+- Verifique Python 3.10+:
+
+```bash
+python3 --version
+```
+
+- Verifique ferramentas de build presentes (ex.: build-essential):
+
+```bash
+dpkg -s build-essential || echo "instale build-essential"
+```
+
+- Se usar Docker, confirme daemon ativo:
+
+```bash
+docker info
+```
+
+### Checklist pré-execução (Windows)
+
+Antes de instalar dependências ou rodar os scripts, verifique:
+
+- Recomenda-se usar Conda/Miniconda:
+
+```powershell
+conda --version
+```
+
+- Verifique Python (se não usar conda):
+
+```powershell
+python --version
+```
+
+- Para Docker, confirme Docker Desktop rodando (Windows) e WSL2 habilitado para melhor compatibilidade:
+  - Abra Docker Desktop e confirme status "Running".
+
+- Se instalar ferramentas nativas (GDAL), prefira canais conda-forge para evitar problemas binários:
+
+```powershell
+conda install -c conda-forge gdal geopandas -y
+```
+
+### Links úteis
+
+- Homebrew: https://brew.sh  
+- Conda / Miniconda: https://docs.conda.io/en/latest/  
+- Conda-forge: https://conda-forge.org/  
+- Docker Desktop: https://www.docker.com/products/docker-desktop  
+- OSGeo4W (Windows GDAL/OSGeo): https://trac.osgeo.org/osgeo4w/  
+- PyPI (pacotes Python): https://pypi.org/
+
+Windows (recomendado: Conda / Miniconda)
+
+Opção mais simples — usar conda (recomendado para pacotes geoespaciais):
+
+```bash
+# criar ambiente
+conda create -n tech-challenge python=3.10 -y
+conda activate tech-challenge
+conda install -c conda-forge gdal geopandas fiona shapely pyproj -y
+```
+
+Se preferir usar pip no Windows, instale previamente GDAL/OSGeo via OSGeo4W ou instale wheels binários apropriados — o método mais confiável é conda/conda-forge.
+
+Notas:
+- Em ambientes Apple Silicon (M1/M2) pode ser necessário usar versões compatíveis do Homebrew (em /opt/homebrew) e instalar dependências via conda-forge para evitar problemas binários.  
+- Após instalar bibliotecas de sistema, use `pip install -r requirements.txt` ou instale a partir do wheelhouse.
+
 ## Estrutura sugerida do repositório (foco Projeto 2)
 
 ```
