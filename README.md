@@ -384,3 +384,93 @@ Os artefatos de validação são gravados em `experiments/validate_parse.json` e
 - Design da representação: `docs/design_repr.md`  
 - Notas de implementação (parser & stubs): `docs/implementation_notes.md`  
 - Fitness (métricas e penalidades): `docs/fitness.md`
+ 
+## Status atual do projeto
+
+Implementações já concluídas (resumo):
+
+- Representação VRP e parser CSV (`src/ga/representation.py`)  
+- Núcleo de fitness com Haversine e penalidades por capacidade/prioridade (`src/ga/fitness.py`)  
+- Operadores genéticos: relocate, swap, 2-opt e crossover VRP (`src/ga/operators.py`)  
+- Inicializadores heurísticos: nearest neighbor e Clarke-Wright (`src/ga/initialization.py`)  
+- População e selection (tournament, roulette) (`src/ga/population.py`)  
+- Engine GA e runner de exemplo (`src/ga/engine.py`, `scripts/run_ga_example.py`)  
+- Export e visualização: GeoJSON e mapa HTML (`src/viz/map.py`, `scripts/export_artifacts.py`)  
+- Integração LLM (adapter OpenAI + fallback) e geração de instruções (`src/llm/adapter.py`, `scripts/generate_instructions.py`)  
+- Scripts utilitários e de suporte: `scripts/run_local.sh`, `scripts/build_wheelhouse.sh`, `scripts/install_from_wheelhouse.sh`, `scripts/install_system_deps.sh`  
+- Testes básicos e documentação inicial nos arquivos `docs/` e `tests/ga/`.
+
+## Quickstart
+
+1. Instale dependências (venv ou Poetry). Recomenda-se Poetry:
+
+```bash
+poetry install
+poetry shell
+```
+
+Ou com venv/pip:
+
+```bash
+python3 -m venv .venv
+source .venv/bin/activate
+pip install -r requirements.txt
+```
+
+2. Rodar validações rápidas:
+
+```bash
+PYTHONPATH=. python3 scripts/validate_parse.py
+PYTHONPATH=. python3 scripts/validate_repr.py
+```
+
+3. Rodar um experimento de exemplo (GA curto):
+
+```bash
+PYTHONPATH=. python3 scripts/run_ga_example.py
+```
+
+4. Exportar artefatos (geojson, html, results.csv) a partir do diretório do run:
+
+```bash
+PYTHONPATH=. python3 scripts/export_artifacts.py experiments/run_<timestamp>
+```
+
+5. Gerar instruções com LLM (fallback se sem chave):
+
+```bash
+PYTHONPATH=. python3 scripts/generate_instructions.py experiments/run_<timestamp>
+```
+
+## Artefatos gerados
+
+Os runs geram um diretório `experiments/run_<timestamp>/` contendo:
+
+- `history.csv` — histórico por geração (generation, best_fitness, avg_fitness)  
+- `best_solution.csv` — rotas do melhor indivíduo (route_index, sequence com '|' como separador)  
+- `routes.geojson` — GeoJSON com LineString por veículo e propriedades (vehicle_id, sequence, load, priorities)  
+- `route_map.html` — mapa interativo (folium)  
+- `results.csv` — resumo (total_distance, total_load, vehicles)
+
+Consulte `docs/output_formats.md` para mais detalhes.
+
+## Arquitetura / Fluxo
+
+```mermaid
+flowchart TD
+  A[Runner CLI] --> B[GA Engine]
+  B --> C[Artifacts (history.csv, best_solution.csv)]
+  C --> D[Export (geojson, html, results.csv)]
+  D --> E[LLM Adapter -> instruction.txt]
+  D --> F[API (opcional) -> endpoints /jobs /routes]
+```
+
+## CI e testes
+
+Rodar testes locais:
+
+```bash
+PYTHONPATH=. pytest -q
+```
+
+Workflow CI inicial está em `.github/workflows/ci.yml` (executa testes e sobe artefatos de experimentos).
