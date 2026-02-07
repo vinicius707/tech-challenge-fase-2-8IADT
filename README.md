@@ -104,7 +104,8 @@ Se você estiver em um ambiente sem acesso à internet, use um wheelhouse (cole�
 ```
 
 Observações:
-- Pacotes geoespaciais (GDAL, geopandas, etc.) podem exigir bibliotecas de sistema na máquina alvo (ex.: libgdal). Instale-as antes de instalar os wheels.  
+
+- Pacotes geoespaciais (GDAL, geopandas, etc.) podem exigir bibliotecas de sistema na máquina alvo (ex.: libgdal). Instale-as antes de instalar os wheels.
 - Os scripts em `scripts/` são fornecidos para conveniência; torne-os executáveis com `chmod +x scripts/*.sh` antes de usar.
 
 ## Dependências de sistema (Ubuntu / macOS / Windows)
@@ -220,11 +221,11 @@ conda install -c conda-forge gdal geopandas -y
 
 ### Links úteis
 
-- Homebrew: https://brew.sh  
-- Conda / Miniconda: https://docs.conda.io/en/latest/  
-- Conda-forge: https://conda-forge.org/  
-- Docker Desktop: https://www.docker.com/products/docker-desktop  
-- OSGeo4W (Windows GDAL/OSGeo): https://trac.osgeo.org/osgeo4w/  
+- Homebrew: https://brew.sh
+- Conda / Miniconda: https://docs.conda.io/en/latest/
+- Conda-forge: https://conda-forge.org/
+- Docker Desktop: https://www.docker.com/products/docker-desktop
+- OSGeo4W (Windows GDAL/OSGeo): https://trac.osgeo.org/osgeo4w/
 - PyPI (pacotes Python): https://pypi.org/
 
 Windows (recomendado: Conda / Miniconda)
@@ -241,7 +242,8 @@ conda install -c conda-forge gdal geopandas fiona shapely pyproj -y
 Se preferir usar pip no Windows, instale previamente GDAL/OSGeo via OSGeo4W ou instale wheels binários apropriados — o método mais confiável é conda/conda-forge.
 
 Notas:
-- Em ambientes Apple Silicon (M1/M2) pode ser necessário usar versões compatíveis do Homebrew (em /opt/homebrew) e instalar dependências via conda-forge para evitar problemas binários.  
+
+- Em ambientes Apple Silicon (M1/M2) pode ser necessário usar versões compatíveis do Homebrew (em /opt/homebrew) e instalar dependências via conda-forge para evitar problemas binários.
 - Após instalar bibliotecas de sistema, use `pip install -r requirements.txt` ou instale a partir do wheelhouse.
 
 ## Estrutura sugerida do repositório (foco Projeto 2)
@@ -343,10 +345,3 @@ MIT License
 - Abra issues detalhando bugs/funcionalidades.
 - Pull requests pequenos com testes e descrição.
 - Siga PEP8/PEP257; inclua testes para novas funções.
-
----
-
-Se quiser, eu posso agora:
-
-- gerar `requirements.txt` / `pyproject.toml` com versões recomendadas,
-- criar template de `Dockerfile`, `openapi.yaml` ou um workflow GitHub Actions para rodar testes/experimentos.
