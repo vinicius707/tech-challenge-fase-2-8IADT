@@ -345,3 +345,42 @@ MIT License
 - Abra issues detalhando bugs/funcionalidades.
 - Pull requests pequenos com testes e descrição.
 - Siga PEP8/PEP257; inclua testes para novas funções.
+
+## Recursos internos (atual)
+
+Arquivos e módulos relevantes já presentes neste repositório:
+
+- Código GA e utilitários: `src/ga/representation.py`, `src/ga/fitness.py`, `src/ga/operators.py`, `src/ga/population.py`  
+- Runner e exemplos: `src/optimize.py`, `scripts/run_local.sh`  
+- Scripts auxiliares: `scripts/build_wheelhouse.sh`, `scripts/install_from_wheelhouse.sh`, `scripts/install_system_deps.sh`, `scripts/validate_parse.py`, `scripts/validate_repr.py`  
+- Experimentos e dados: `experiments/configs/experiment_01.yaml`, `experiments/prompts/route_instructions_prompt.txt`, `data/instances/hospital_points.csv`  
+- Documentação adicional: `docs/design_repr.md`, `docs/implementation_notes.md`, `docs/fitness.md`  
+- Testes: `tests/ga/` (ex.: `test_repr.py`, `test_fitness.py`, `test_fitness_penalties.py`)  
+- CI: `.github/workflows/ci.yml`
+
+## Como rodar testes e validações rápidas
+
+Recomenda-se usar PYTHONPATH para rodar os scripts e testes locais:
+
+```bash
+# Rodar todos os testes
+PYTHONPATH=. pytest -q
+
+# Rodar validação do parser/representação
+PYTHONPATH=. python3 scripts/validate_parse.py
+PYTHONPATH=. python3 scripts/validate_repr.py
+```
+
+Os artefatos de validação são gravados em `experiments/validate_parse.json` e `experiments/validate_repr.json`.
+
+## Convenções de branching e commits
+
+- Branch por feature: `feat/vrp-<short>` (ex.: `feat/vrp-fitness`).  
+- Mensagens de commit: `type(scope): short description` (ex.: `feat(vrp): add fitness penalties`).  
+- Fluxo sugerido por etapa: Implement → Test → Commit → Document → Push → PR. Inclua no corpo do commit um breve resumo das validações e caminhos para artefatos.
+
+## Links rápidos para docs
+
+- Design da representação: `docs/design_repr.md`  
+- Notas de implementação (parser & stubs): `docs/implementation_notes.md`  
+- Fitness (métricas e penalidades): `docs/fitness.md`
