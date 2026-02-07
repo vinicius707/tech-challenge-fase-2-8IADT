@@ -24,3 +24,22 @@ def tournament_selection(population: List[List[List[int]]], fitnesses: List[floa
     participants = sorted(participants, key=lambda i: fitnesses[i])
     return population[participants[0]]
 
+
+def roulette_selection(population: List[List[List[int]]], fitnesses: List[float]) -> List[List[int]]:
+    """
+    Roulette wheel selection (fitness must be positive; lower fitness = better so we invert).
+    """
+    # convert to positive scores where higher is better
+    max_f = max(fitnesses) if fitnesses else 0.0
+    scores = [max_f - f + 1e-6 for f in fitnesses]  # add epsilon
+    total = sum(scores)
+    if total <= 0:
+        return random.choice(population)
+    pick = random.uniform(0, total)
+    current = 0.0
+    for ind, s in enumerate(scores):
+        current += s
+        if current >= pick:
+            return population[ind]
+    return population[-1]
+
