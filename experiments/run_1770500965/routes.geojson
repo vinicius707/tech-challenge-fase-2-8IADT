@@ -1,0 +1,129 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "vehicle_id": 0,
+        "sequence": [
+          4,
+          5,
+          10
+        ],
+        "load": 28.0,
+        "priorities": [
+          "high",
+          "medium",
+          "medium"
+        ]
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -46.635,
+            -23.545
+          ],
+          [
+            -46.64,
+            -23.548
+          ],
+          [
+            -46.635,
+            -23.559
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "vehicle_id": 1,
+        "sequence": [
+          1,
+          6,
+          3
+        ],
+        "load": 21.0,
+        "priorities": [
+          "high",
+          "low",
+          "low"
+        ]
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -46.6333,
+            -23.5505
+          ],
+          [
+            -46.63,
+            -23.56
+          ],
+          [
+            -46.62,
+            -23.558
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "vehicle_id": 2,
+        "sequence": [
+          9,
+          7,
+          2
+        ],
+        "load": 20.0,
+        "priorities": [
+          "low",
+          "medium",
+          "medium"
+        ]
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -46.62,
+            -23.547
+          ],
+          [
+            -46.618,
+            -23.552
+          ],
+          [
+            -46.625,
+            -23.556
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "vehicle_id": 3,
+        "sequence": [
+          8
+        ],
+        "load": 20.0,
+        "priorities": [
+          "high"
+        ]
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -46.628,
+            -23.565
+          ]
+        ]
+      }
+    }
+  ]
+}

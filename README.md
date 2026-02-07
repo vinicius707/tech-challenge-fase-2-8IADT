@@ -466,6 +466,22 @@ Os runs geram um diretório `experiments/run_<timestamp>/` contendo:
 
 Consulte `docs/output_formats.md` para mais detalhes.
 
+## Plots de convergência
+
+A cada execução de experimento o repositório pode gerar um gráfico de convergência por run em:
+
+- `experiments/run_<timestamp>/convergence.png`
+
+Além disso, um comparativo entre runs pode ser gerado como:
+
+- `experiments/convergence_comparison.png`  
+- `experiments/convergence_comparison.svg`  
+- `experiments/convergence_comparison.pdf`
+
+Você pode incorporar o PNG comparativo diretamente no README usando a referência relativa:
+
+![Convergência dos experiments](experiments/convergence_comparison.png)
+
 ## Arquitetura / Fluxo
 
 ```mermaid
