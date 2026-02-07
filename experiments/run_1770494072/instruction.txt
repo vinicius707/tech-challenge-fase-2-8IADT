@@ -1,0 +1,59 @@
+INSTRUCTION (FALLBACK MODE)
+
+Prompt template used:
+Você é um assistente que gera instruções claras e seguras para equipes de entrega hospitalar.
+
+Entrada: uma rota com múltiplos pontos de entrega. Cada ponto tem: id, endereço (ou coordenadas), prioridade (alta/média/baixa), volume, observações.
+
+Saída esperada: instruções passo-a-passo para o motorista/equipe, contendo:
+- Resumo da rota (distância total estimada, tempo aproximado, número de paradas, veículos usados)
+- Ordem de paradas com instruções práticas (ex.: "Parada 3: Hospital X — entregar caixa A na Recepção, confirmar assinatura")
+- Avisos sobre restrições (capacidade, rota alternativa, área de restrição)
+- Informações de contato importantes (se fornecidas)
+- Observações sobre prioridade (quais entregas são críticas)
+
+Regras:
+- Seja direto e objetivo; use linguagem adequada para motoristas/operadores.
+- Priorize entregas críticas; indique se uma entrega pode ser adiada ou precisa de atenção imediata.
+- Inclua instruções de segurança e manuseio quando aplicável.
+- Não invente contatos sensíveis; use apenas informações fornecidas.
+
+Exemplo de saída (formato livre):
+
+Rota resumo:
+- Distância estimada: 12.3 km
+- Tempo estimado: 35 minutos
+- Veículos: 1
+
+1) Parada 1 — Clínica A (coord: -23.55,-46.63)
+   - Entregar: 2 caixas (volume 10)
+   - Observação: frágil — manusear com cuidado; colocar na área refrigerada
+   - Confirmação: solicitar assinatura na lista de recebimento
+
+2) Parada 2 — UBS B (coord: -23.56,-46.62)
+   - Entregar: 1 kit (prioridade alta)
+   - Observação: entregar diretamente ao farmacêutico no balcão
+
+
+
+Route summary:
+Vehicle 0: 4 stops, load=41.0
+  1) id:4 coord:(-23.545,-46.635) priority:high
+  2) id:5 coord:(-23.548,-46.64) priority:medium
+  3) id:1 coord:(-23.5505,-46.6333) priority:high
+  4) id:2 coord:(-23.556,-46.625) priority:medium
+Vehicle 1: 3 stops, load=17.0
+  1) id:9 coord:(-23.547,-46.62) priority:low
+  2) id:7 coord:(-23.552,-46.618) priority:medium
+  3) id:3 coord:(-23.558,-46.62) priority:low
+Vehicle 2: 3 stops, load=31.0
+  1) id:8 coord:(-23.565,-46.628) priority:high
+  2) id:6 coord:(-23.56,-46.63) priority:low
+  3) id:10 coord:(-23.559,-46.635) priority:medium
+
+Suggested step-by-step instructions:
+1) Seguir a ordem das paradas conforme listado.
+2) Priorizar entregas marcadas como 'high'.
+3) Confirmar assinatura e registrar observações.
+
+Fim das instruções.
