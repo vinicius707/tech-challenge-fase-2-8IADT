@@ -37,6 +37,14 @@ Este guia foi criado para tornar a documentação acessível a todos os níveis:
   PYTHONPATH=. python3 scripts/generate_instructions.py experiments/run_<timestamp>
   ```
 
+## Notebooks interativos
+
+Guias práticos (clique para abrir o notebook):
+
+[![Quickstart](../docs/images/quickstart.png)](../notebooks/quickstart.ipynb)  
+[![Export & Visualize](../docs/images/export_visualize.png)](../notebooks/export_visualize.ipynb)  
+[![LLM Instructions](../docs/images/llm_instructions.png)](../notebooks/llm_instructions.ipynb)
+
 4) Seções para iniciantes
 
 - Se preferir GUI: abra `experiments/run_<timestamp>/route_map.html` no navegador para ver rotas.  

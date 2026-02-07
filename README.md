@@ -385,6 +385,14 @@ Os artefatos de validação são gravados em `experiments/validate_parse.json` e
 - Notas de implementação (parser & stubs): `docs/implementation_notes.md`  
 - Fitness (métricas e penalidades): `docs/fitness.md`
  
+## Notebooks (guias interativos)
+
+Clique nas imagens abaixo para abrir os notebooks (links relativos no repositório):
+
+[![Quickstart](docs/images/quickstart.png)](notebooks/quickstart.ipynb)  
+[![Export & Visualize](docs/images/export_visualize.png)](notebooks/export_visualize.ipynb)  
+[![LLM Instructions](docs/images/llm_instructions.png)](notebooks/llm_instructions.ipynb)
+ 
 ## Status atual do projeto
 
 Implementações já concluídas (resumo):
