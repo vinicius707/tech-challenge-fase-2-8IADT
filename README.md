@@ -458,11 +458,11 @@ Consulte `docs/output_formats.md` para mais detalhes.
 
 ```mermaid
 flowchart TD
-  A[Runner CLI] --> B[GA Engine]
-  B --> C[Artifacts (history.csv, best_solution.csv)]
-  C --> D[Export (geojson, html, results.csv)]
-  D --> E[LLM Adapter -> instruction.txt]
-  D --> F[API (opcional) -> endpoints /jobs /routes]
+  A["Runner CLI"] --> B["GA Engine"]
+  B --> C["Artifacts (history.csv, best_solution.csv)"]
+  C --> D["Export (geojson, html, results.csv)"]
+  D --> E["LLM Adapter -> instruction.txt"]
+  D --> F["API (opcional) -> endpoints /jobs /routes"]
 ```
 
 ## CI e testes
