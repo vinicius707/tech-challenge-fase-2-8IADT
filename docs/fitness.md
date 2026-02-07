@@ -43,3 +43,26 @@ vehicle:
 
 Testes unitários em `tests/ga/test_fitness.py` validam Haversine, total_distance_for_route e fitness quando apenas distância é considerada.
 
+## Para iniciantes
+
+- O que é: fitness é um número que resume a qualidade de uma solução; menor = melhor.  
+- Como testar rápido: rode `PYTHONPATH=. pytest -q tests/ga/test_fitness.py` ou use o runner de exemplo e verifique `history.csv`.
+
+## Para desenvolvedores
+
+- Use `fitness_for_chromosome(decoded_routes, weights, depot)` em pipelines. `decoded_routes` é lista de rotas, cada rota uma lista de dicts com chaves `id, lat, lon, priority, volume`.  
+- Exemplo:
+
+```python
+from src.ga.representation import parse_instance_csv, build_points_lookup, decode_chromosome
+from src.ga.fitness import fitness_for_chromosome
+
+points = parse_instance_csv("data/instances/hospital_points.csv")
+lookup = build_points_lookup(points)
+chrom = [[1,2,3],[4,5]]
+decoded = decode_chromosome(chrom, lookup)
+weights = {"distance":1.0, "capacity_penalty":1.0, "priority_penalty":2.0, "vehicle_capacity":100.0}
+f = fitness_for_chromosome(decoded, weights)
+print("fitness:", f)
+```
+

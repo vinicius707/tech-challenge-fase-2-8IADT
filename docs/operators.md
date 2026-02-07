@@ -8,6 +8,25 @@ Operadores disponíveis (implementados em `src/ga/operators.py`)
 - swap(chromosome): troca dois clientes (entre rotas ou intra-rota). Mantém cobertura completa.
 - two_opt(route): aplica 2-opt em uma única rota (inverte um segmento) para melhoria local.
  - crossover_vrp(parent1, parent2, num_vehicles): aplica Order Crossover (OX) em sequências achatadas e redistribui a sequência resultante entre veículos (split round-robin). Útil como operador de recombinação entre soluções.
+ 
+## Para iniciantes
+
+- O que fazem os operadores: transformam soluções (cromossomas) para explorar o espaço de soluções. Alguns melhoram localmente (2-opt), outros exploram globalmente (relocate, swap, crossover).  
+- Comando rápido: veja `tests/ga/test_operators.py` para exemplos de uso.
+
+## Para desenvolvedores
+
+- Arquivo: `src/ga/operators.py`  
+- Operadores estocásticos — em produção, controlar via probabilidades de mutação/crossover no GA.  
+- Exemplo (Python):
+
+```python
+from src.ga import operators
+chrom = [[1,2,3],[4,5],[6]]
+chrom = operators.relocate(chrom)
+chrom = operators.swap(chrom)
+chrom[0] = operators.two_opt(chrom[0])
+```
 
 Exemplo de uso:
 

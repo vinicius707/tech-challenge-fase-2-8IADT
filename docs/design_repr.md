@@ -26,3 +26,23 @@ Evolução futura
 - Substituir encoder round-robin por heurísticas (savings, nearest neighbor) para inicialização.
 - Suportar divisores em um cromossoma linear (lista com marcadores) se necessário.
 
+## Para iniciantes (exemplo rápido)
+
+- Passo 1: prepare o CSV de instância `data/instances/hospital_points.csv` com colunas `id,lat,lon,priority,volume,notes`.  
+- Passo 2: execute o parser e veja o cromossoma inicial:
+
+```bash
+PYTHONPATH=. python3 - <<'PY'
+from src.ga.representation import parse_instance_csv, build_points_lookup, encode_chromosome, decode_chromosome
+pts = parse_instance_csv("data/instances/hospital_points.csv")
+lookup = build_points_lookup(pts)
+chrom = encode_chromosome(pts, num_vehicles=3)
+print(decode_chromosome(chrom, lookup))
+PY
+```
+
+## Para desenvolvedores
+
+- Mantenha operações internas usando IDs (inteiros) e só faça lookup para export/visualização.  
+- Crie testes que verifiquem que `encode` → `decode` cobre todos os IDs exatamente uma vez.
+
