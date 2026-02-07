@@ -1,0 +1,75 @@
+openapi: 3.0.3
+info:
+  title: Tech Challenge - Routes Optimization API
+  version: "1.0.0"
+  description: API para executar otimização de rotas (Projeto 2) e recuperar artefatos.
+servers:
+  - url: http://localhost:8000
+paths:
+  /optimize:
+    post:
+      summary: Inicia job de otimização
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                instance:
+                  type: string
+                population:
+                  type: integer
+                mutation_rate:
+                  type: number
+                generations:
+                  type: integer
+                constraints:
+                  type: object
+      responses:
+        '202':
+          description: Job aceito
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  job_id:
+                    type: string
+  /jobs/{job_id}:
+    get:
+      summary: Obtém status do job
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Status do job
+  /routes/{job_id}:
+    get:
+      summary: Recupera rotas otimizadas (geojson/csv/html)
+      parameters:
+        - name: job_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Artefatos do job
+  /instructions/{route_id}:
+    post:
+      summary: Gera instruções detalhadas para uma rota via LLM
+      parameters:
+        - name: route_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: Texto com instruções gerado pela LLM
+components: {}

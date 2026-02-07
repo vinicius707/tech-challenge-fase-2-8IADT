@@ -1,0 +1,36 @@
+[tool.poetry]
+name = "tech-challenge-routes"
+version = "0.1.0"
+description = "Projeto 2 — Otimização de Rotas Médicas (TSP/VRP) com Algoritmos Genéticos e integração com LLMs."
+authors = ["Seu Nome <seu.email@example.com>"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.10"
+numpy = "^1.23"
+pandas = "^1.5"
+networkx = "^3.0"
+folium = "^0.13"
+geopandas = "^0.12"
+shapely = "^2.0"
+matplotlib = "^3.5"
+seaborn = "^0.12"
+requests = "^2.28"
+openai = "^0.27"
+ortools = "^9.6"
+geopy = "^2.3"
+scipy = "^1.9"
+
+[tool.poetry.dev-dependencies]
+pytest = "^7.0"
+ruff = "^0.6"
+
+[tool.poetry.scripts]
+optimize = "src.optimize:main"
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.urls]
+homepage = "https://example.com"
