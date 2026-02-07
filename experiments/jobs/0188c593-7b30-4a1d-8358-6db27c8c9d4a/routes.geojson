@@ -1,0 +1,97 @@
+{
+  "type": "FeatureCollection",
+  "features": [
+    {
+      "type": "Feature",
+      "properties": {
+        "vehicle_id": 0,
+        "sequence": [
+          9,
+          1,
+          4,
+          5,
+          8
+        ],
+        "load": 56.0,
+        "priorities": [
+          "low",
+          "high",
+          "high",
+          "medium",
+          "high"
+        ]
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -46.62,
+            -23.547
+          ],
+          [
+            -46.6333,
+            -23.5505
+          ],
+          [
+            -46.635,
+            -23.545
+          ],
+          [
+            -46.64,
+            -23.548
+          ],
+          [
+            -46.628,
+            -23.565
+          ]
+        ]
+      }
+    },
+    {
+      "type": "Feature",
+      "properties": {
+        "vehicle_id": 1,
+        "sequence": [
+          2,
+          6,
+          7,
+          3,
+          10
+        ],
+        "load": 33.0,
+        "priorities": [
+          "medium",
+          "low",
+          "medium",
+          "low",
+          "medium"
+        ]
+      },
+      "geometry": {
+        "type": "LineString",
+        "coordinates": [
+          [
+            -46.625,
+            -23.556
+          ],
+          [
+            -46.63,
+            -23.56
+          ],
+          [
+            -46.618,
+            -23.552
+          ],
+          [
+            -46.62,
+            -23.558
+          ],
+          [
+            -46.635,
+            -23.559
+          ]
+        ]
+      }
+    }
+  ]
+}

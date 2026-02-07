@@ -1,0 +1,39 @@
+{
+  "432dbf01-77a4-43ac-a7e9-b1eed9e0eb63": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 2,
+      "population": 10,
+      "generations": 5,
+      "mutation_rate": 0.05,
+      "elitism": 1,
+      "fitness_weights": null
+    },
+    "out_dir": "experiments/jobs/432dbf01-77a4-43ac-a7e9-b1eed9e0eb63",
+    "artifacts": {
+      "out_dir": "experiments/jobs/432dbf01-77a4-43ac-a7e9-b1eed9e0eb63",
+      "history": "experiments/jobs/432dbf01-77a4-43ac-a7e9-b1eed9e0eb63/history.csv",
+      "best": "experiments/jobs/432dbf01-77a4-43ac-a7e9-b1eed9e0eb63/best_solution.csv"
+    }
+  },
+  "0188c593-7b30-4a1d-8358-6db27c8c9d4a": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 2,
+      "population": 10,
+      "generations": 5,
+      "mutation_rate": 0.05,
+      "elitism": 1,
+      "fitness_weights": null
+    },
+    "out_dir": "experiments/jobs/0188c593-7b30-4a1d-8358-6db27c8c9d4a",
+    "artifacts": {
+      "out_dir": "experiments/jobs/0188c593-7b30-4a1d-8358-6db27c8c9d4a",
+      "history": "experiments/jobs/0188c593-7b30-4a1d-8358-6db27c8c9d4a/history.csv",
+      "best": "experiments/jobs/0188c593-7b30-4a1d-8358-6db27c8c9d4a/best_solution.csv",
+      "routes_geojson": "experiments/jobs/0188c593-7b30-4a1d-8358-6db27c8c9d4a/routes.geojson"
+    }
+  }
+}

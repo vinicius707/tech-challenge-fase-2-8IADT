@@ -1,0 +1,12 @@
+INSTRUCTION (FALLBACK MODE)
+
+Route summary:
+Vehicle 0: 5 stops
+Vehicle 1: 5 stops
+
+Suggested step-by-step instructions:
+1) Seguir a ordem das paradas conforme listado.
+2) Priorizar entregas marcadas como 'high'.
+3) Confirmar assinatura e registrar observações.
+
+Fim das instruções.
