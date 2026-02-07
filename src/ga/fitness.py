@@ -40,9 +40,22 @@ def fitness_for_chromosome(decoded_routes: List[List[Dict[str, Any]]], weights: 
     for route in decoded_routes:
         total_distance += total_distance_for_route(route, depot=depot)
 
-    # Placeholder penalties (to be implemented)
+    # Capacity penalty: sum of overload across all routes (simple linear penalty)
+    capacity = weights.get('vehicle_capacity', None)
     capacity_penalty = 0.0
+    if capacity is not None:
+        for route in decoded_routes:
+            load = sum(p.get('volume', 0.0) for p in route)
+            if load > capacity:
+                capacity_penalty += (load - capacity)
+
+    # Priority penalty: penalize high-priority deliveries that appear later in routes.
+    # We'll sum position indices for 'high' priority items (earlier is better).
     priority_penalty = 0.0
+    for route in decoded_routes:
+        for idx, p in enumerate(route):
+            if str(p.get('priority', '')).lower() == 'high':
+                priority_penalty += idx  # 0 = best, larger = worse
 
     return weights.get('distance', 1.0) * total_distance + weights.get('capacity_penalty', 0.0) * capacity_penalty + weights.get('priority_penalty', 0.0) * priority_penalty
 
