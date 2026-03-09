@@ -1,4 +1,6 @@
 from fastapi import FastAPI, BackgroundTasks, HTTPException
+from fastapi.middleware.cors import CORSMiddleware
+from fastapi.staticfiles import StaticFiles
 from pydantic import BaseModel
 from typing import Optional, Dict, Any
 import uuid
@@ -12,7 +14,15 @@ import csv
 
 app = FastAPI(title="Tech Challenge - Routes Optimization API")
 
+app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"], allow_methods=["*"], allow_headers=["*"])
+
 JOBS_PATH = "experiments/jobs.json"
+EXPERIMENTS_DIR = "experiments"
+
+
+def _mount_static():
+    if os.path.isdir(EXPERIMENTS_DIR):
+        app.mount("/artifacts", StaticFiles(directory=EXPERIMENTS_DIR), name="artifacts")
 EXECUTOR = ThreadPoolExecutor(max_workers=2)
 
 def load_jobs() -> Dict[str, Any]:
@@ -103,6 +113,12 @@ def optimize(req: OptimizeRequest, background_tasks: BackgroundTasks):
     return {"job_id": job_id, "status": "queued"}
 
 
+@app.get("/jobs")
+def list_jobs():
+    jobs = load_jobs()
+    return {"jobs": {k: {"status": v.get("status"), "job_id": k} for k, v in jobs.items()}}
+
+
 @app.get("/jobs/{job_id}")
 def get_job(job_id: str):
     jobs = load_jobs()
@@ -152,4 +168,11 @@ def generate_instructions(job_id: str):
     with open(out_path, "w", encoding="utf-8") as fh:
         fh.write(instr)
     return {"status": "ok", "instruction": out_path}
+
+
+# mount static files after routes so /artifacts doesn't conflict
+try:
+    _mount_static()
+except RuntimeError:
+    pass
 
