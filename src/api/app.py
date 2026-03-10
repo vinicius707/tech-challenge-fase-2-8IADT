@@ -444,6 +444,8 @@ def _build_job_context_for_qa(job: Dict[str, Any]) -> str:
                      f"delivery_ids={req.get('delivery_ids')}, locations_ids={req.get('locations_ids')}")
     artifacts = job.get("artifacts", {})
     vr = artifacts.get("vehicle_reports") or []
+    if not vr:
+        vr = _reconstruct_vehicle_reports_from_job(job)
     total_dist = sum(r.get("distance_km", 0) for r in vr)
     total_load = sum(r.get("load_kg", 0) for r in vr)
     ctx_parts.append(f"Métricas: total_distance_km={round(total_dist, 2)}, total_load_kg={round(total_load, 2)}, "
@@ -453,6 +455,42 @@ def _build_job_context_for_qa(job: Dict[str, Any]) -> str:
         addrs = [s.get("endereco", f"Ponto {s.get('id')}") for s in stops]
         ctx_parts.append(f"Veículo {i + 1}: {r.get('distance_km', 0)} km, carga {r.get('load_kg', 0)} kg; paradas: {', '.join(addrs)}")
     return "\n".join(ctx_parts)
+
+
+def _reconstruct_vehicle_reports_from_job(job: Dict[str, Any]) -> List[Dict[str, Any]]:
+    """Reconstruct vehicle_reports from best_solution.csv when artifacts lack them."""
+    artifacts = job.get("artifacts", {})
+    out_dir = artifacts.get("out_dir") or job.get("out_dir")
+    if not out_dir or not os.path.isdir(out_dir):
+        return []
+    best_csv = os.path.join(out_dir, "best_solution.csv")
+    if not os.path.exists(best_csv):
+        return []
+    try:
+        points = _build_points_from_config(job.get("request", {}))
+        lookup = representation.build_points_lookup(points)
+        routes = []
+        with open(best_csv, newline="", encoding="utf-8") as fh:
+            reader = csv.DictReader(fh)
+            for row in reader:
+                seq = [int(x) for x in row.get("sequence", "").split("|") if x]
+                routes.append(seq)
+        decoded = representation.decode_chromosome(routes, lookup)
+        depot = None
+        if decoded:
+            lats = [p["lat"] for r in decoded for p in r]
+            lons = [p["lon"] for r in decoded for p in r]
+            if lats and lons:
+                depot = {"lat": sum(lats) / len(lats), "lon": sum(lons) / len(lons)}
+        vehicle_reports = []
+        for vid, route in enumerate(decoded):
+            load_kg = sum(p.get("volume", 0.0) for p in route)
+            stops = [{"id": p["id"], "endereco": p.get("notes", "") or f"Ponto {p['id']}"} for p in route]
+            distance_km = round(fitness.total_distance_for_route(route, depot=depot), 2)
+            vehicle_reports.append({"vehicle_id": vid, "load_kg": load_kg, "stops": stops, "distance_km": distance_km})
+        return vehicle_reports
+    except Exception:
+        return []
 
 
 @app.post("/jobs/{job_id}/ask")
