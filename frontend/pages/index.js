@@ -8,17 +8,17 @@ export default function Home() {
   return (
     <Box>
       <Typography variant="h4" gutterBottom>
-        Otimização de Rotas Médicas
+        Planejamento de Rotas de Distribuição
       </Typography>
       <Typography variant="body1" paragraph>
-        Crie jobs de otimização, acompanhe o progresso e visualize os artefatos gerados.
+        Planeje rotas de distribuição, acompanhe o progresso e visualize os resultados gerados.
       </Typography>
       <Box sx={{ display: 'flex', gap: 2, mt: 3 }}>
         <Link href="/create" passHref legacyBehavior>
-          <Button variant="contained">Criar novo job</Button>
+          <Button variant="contained">Planejar rota</Button>
         </Link>
         <Link href="/jobs" passHref legacyBehavior>
-          <Button variant="outlined">Ver jobs</Button>
+          <Button variant="outlined">Ver planejamentos</Button>
         </Link>
       </Box>
     </Box>

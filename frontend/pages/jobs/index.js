@@ -38,11 +38,11 @@ export default function JobsList() {
   return (
     <Box>
       <Typography variant="h5" gutterBottom>
-        Jobs
+        Planejamentos de rotas
       </Typography>
       <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 2, flexDirection: { xs: 'column', sm: 'row' } }}>
         {jobs.length === 0 ? (
-          <Typography color="text.secondary">Nenhum job ainda.</Typography>
+          <Typography color="text.secondary">Nenhum planejamento ainda.</Typography>
         ) : (
           jobs.map((job) => <JobCard key={job.job_id} job={job} />)
         )}

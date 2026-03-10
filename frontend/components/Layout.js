@@ -8,8 +8,12 @@ import { Box } from '@mui/material'
 
 const navLinks = [
   { href: '/', label: 'Início' },
-  { href: '/create', label: 'Criar Job' },
-  { href: '/jobs', label: 'Jobs' },
+  { href: '/create', label: 'Planejar rota' },
+  { href: '/jobs', label: 'Planejamentos' },
+  { href: '/locations', label: 'Endereços' },
+  { href: '/vehicles', label: 'Veículos' },
+  { href: '/deliveries', label: 'Encomendas' },
+  { href: '/reports', label: 'Relatórios' },
 ]
 
 export default function Layout({ children }) {
@@ -18,7 +22,7 @@ export default function Layout({ children }) {
       <AppBar position="static">
         <Toolbar>
           <Typography variant="h6" component="div" sx={{ flexGrow: 1 }}>
-            Tech Challenge — Rotas
+            Planejamento de Rotas — Distribuição Hospitalar
           </Typography>
           <Box component="nav" sx={{ display: 'flex', gap: { xs: 1, sm: 2 }, flexWrap: 'wrap' }}>
             {navLinks.map((link) => (

@@ -11,7 +11,7 @@ export default function MapPreview({ mapUrl }) {
   if (!mapUrl) {
     return (
       <Alert severity="info">
-        Mapa de rotas não disponível. Execute o job e aguarde a conclusão.
+        Mapa não disponível. Planeje a rota e aguarde a conclusão.
       </Alert>
     )
   }

@@ -14,6 +14,13 @@ const statusColors = {
   failed: 'error',
 }
 
+const statusLabels = {
+  queued: 'Na fila',
+  running: 'Em execução',
+  finished: 'Concluído',
+  failed: 'Falhou',
+}
+
 export default function JobCard({ job }) {
   const { job_id, status } = job
   const color = statusColors[status] || 'default'
@@ -25,9 +32,9 @@ export default function JobCard({ job }) {
           {job_id?.slice(0, 8)}…
         </Typography>
         <Typography variant="h6" component="div" sx={{ mt: 0.5 }}>
-          Job {job_id?.slice(0, 8)}
+          Planejamento {job_id?.slice(0, 8)}
         </Typography>
-        <Chip label={status} color={color} size="small" sx={{ mt: 1 }} />
+        <Chip label={statusLabels[status] || status} color={color} size="small" sx={{ mt: 1 }} />
       </CardContent>
       <CardActions>
         <Link href={`/jobs/${job_id}`} passHref legacyBehavior>
