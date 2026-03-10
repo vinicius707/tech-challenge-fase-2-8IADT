@@ -21,6 +21,7 @@ def test_priority_penalty_applied():
     decoded = [[p1, p2, p3]]
     weights = {"distance": 0.0, "capacity_penalty": 0.0, "priority_penalty": 2.0, "vehicle_capacity": 100.0}
     f = fitness.fitness_for_chromosome(decoded, weights, depot=depot)
-    # priority penalty = index 2 * weight 2.0 = 4.0
-    assert abs(f - 4.0) < 1e-6
+    # raw priority penalty = index 2 * _priority_weight("high") = 2 * 2.0 = 4.0
+    # fitness multiplies by priority_penalty weight: 2.0 * 4.0 = 8.0
+    assert abs(f - 8.0) < 1e-6
 
