@@ -70,12 +70,30 @@ poetry install
 poetry run python -m src.optimize --config experiments/configs/experiment_01.yaml
 ```
 
-Exemplo simples (rodando o TSP base):
+Exemplo simples (GA de otimização de rotas):
 
 ```bash
-python src/tsp/run_tsp.py --input data/instances/hospital_points.csv --output experiments/run_001/
-# gera arquivos: routes.geojson, results.csv, route_map.html
+PYTHONPATH=. python3 scripts/run_ga_example.py
+# gera em experiments/run_<timestamp>/: history.csv, best_solution.csv, routes.geojson, route_map.html
 ```
+
+Comparativo GA vs baseline greedy (para relatório técnico):
+
+```bash
+PYTHONPATH=. python3 scripts/run_comparative.py
+# gera experiments/comparative_results.csv com fitness, distância e tempo de GA e greedy
+```
+
+### Código base e adaptações
+
+O repositório inclui `genetic_algorithm_tsp/` como referência do TSP clássico. A implementação principal em `src/ga/` foi desenvolvida para o contexto hospitalar, incorporando:
+
+- **VRP (múltiplos veículos):** cromossomo como lista de rotas; crossover e mutação especializados.
+- **Prioridades:** penalidade na fitness para entregas críticas/alta prioridade atrasadas.
+- **Capacidade de carga:** `capacity_penalty` quando o volume excede a capacidade do veículo.
+- **Autonomia:** `autonomy_penalty` quando a distância da rota excede a autonomia em km.
+- **Depot:** centroide dos pontos; passado explicitamente para a fitness e para a inicialização heurística.
+- **Inicialização heurística:** `init_method` em `engine.run_ga` aceita `"random"` (padrão), `"nearest_neighbor"` ou `"clarke_wright"` para semear a população com heurísticas. O endpoint `/optimize` aceita `init_method` no corpo da requisição.
 
 Com Docker (opcional):
 
@@ -84,6 +102,29 @@ docker build -t tech-challenge-routes:latest .
 docker run --rm -v $(pwd)/experiments:/app/experiments tech-challenge-routes:latest \
   python -m src.optimize --config experiments/configs/experiment_01.yaml
 ```
+
+## Stack Web (API + Frontend)
+
+Para rodar a interface web (Next.js) e a API:
+
+**Backend (API FastAPI):**
+```bash
+uvicorn src.api.app:app --reload --port 8000
+```
+
+**Frontend (Next.js):** é obrigatório rodar **de dentro da pasta `frontend`** ou usar o script da raiz:
+
+```bash
+# Opção 1: da raiz do projeto
+npm run frontend
+
+# Opção 2: manualmente
+cd frontend
+npm install   # apenas na primeira vez
+npm run dev
+```
+
+Acesse o frontend em **http://localhost:3000** (ou 3001 se a 3000 estiver em uso). O frontend retorna 404 se o Next.js for iniciado na raiz do projeto em vez de dentro de `frontend/`.
 
 ## Instalação offline (wheelhouse)
 
@@ -246,21 +287,23 @@ Notas:
 - Em ambientes Apple Silicon (M1/M2) pode ser necessário usar versões compatíveis do Homebrew (em /opt/homebrew) e instalar dependências via conda-forge para evitar problemas binários.
 - Após instalar bibliotecas de sistema, use `pip install -r requirements.txt` ou instale a partir do wheelhouse.
 
-## Estrutura sugerida do repositório (foco Projeto 2)
+## Estrutura do repositório (Projeto 2)
 
 ```
 .
 ├─ README.md
 ├─ requirements.txt / pyproject.toml
 ├─ Dockerfile
-├─ data/                   # instâncias, pontos de entrega, malhas viárias (opcional)
-├─ notebooks/              # notebooks de experimento / demonstração
+├─ data/                   # instâncias, pontos de entrega
+├─ genetic_algorithm_tsp/  # referência do TSP clássico (base)
+├─ notebooks/              # experimentos e demonstração
 ├─ src/
-│  ├─ tsp/                 # código-base TSP fornecido (adaptado)
-│  ├─ ga/                  # implementação do Algoritmo Genético para roteamento
-│  ├─ viz/                 # geração de mapas (folium) e plots
-│  ├─ api/                 # API (FastAPI/Flask) se aplicável
-│  └─ optimize.py          # runner para experimentos
+│  ├─ ga/                  # AG para roteamento (representação, operadores, fitness)
+│  ├─ viz/                 # mapas (folium), OSRM, GeoJSON
+│  ├─ api/                 # API FastAPI
+│  ├─ llm/                 # adapter para LLM (instruções, relatórios, Q&A)
+│  ├─ baselines/           # baseline greedy para comparação
+│  └─ optimize.py          # runner de experimentos
 ├─ experiments/
 │  ├─ configs/             # arquivos de configuração dos experimentos (yaml)
 │  ├─ run_001/             # resultados de um experimento (csv, plots, html)
@@ -287,8 +330,12 @@ Notas:
   - Retorna status, métricas parciais e link para artefatos.
 - GET /routes/{job_id}
   - Retorna geojson das rotas, CSV com ordenação de entregas e HTML do mapa.
-- POST /instructions/{route_id}
+- POST /instructions/{job_id}
   - Gera instruções detalhadas para motorista/equipe usando LLM.
+- POST /jobs/{job_id}/ask
+  - Responde perguntas em linguagem natural sobre rotas e entregas (Q&A com LLM).
+- GET /reports/weekly
+  - Relatório semanal com métricas agregadas e resumo em linguagem natural.
 
 ## Métricas e experimentos
 
