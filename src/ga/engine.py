@@ -1,10 +1,19 @@
-from typing import List, Dict, Any
+from typing import List, Dict, Any, Optional, Callable
 import os
 import time
 import csv
 import random
 
 from . import representation, population, operators, fitness
+from . import initialization
+
+
+def _compute_depot(points: List[Dict[str, Any]]) -> Dict[str, Any]:
+    if not points:
+        return {"lat": 0.0, "lon": 0.0}
+    lats = [p["lat"] for p in points]
+    lons = [p["lon"] for p in points]
+    return {"lat": sum(lats) / len(lats), "lon": sum(lons) / len(lons)}
 
 
 def run_ga(points: List[Dict[str, Any]],
@@ -16,10 +25,14 @@ def run_ga(points: List[Dict[str, Any]],
            selection_method: str = "tournament",
            weights: Dict[str, float] = None,
            depot: Dict[str, Any] = None,
-           out_dir: str = None) -> Dict[str, Any]:
+           init_method: str = "random",
+           out_dir: str = None,
+           on_progress: Optional[Callable[[int, int], None]] = None) -> Dict[str, Any]:
     """
     Simple GA runner.
-    Saves history.csv and best_solution.json in out_dir.
+    Saves history.csv and best_solution.csv in out_dir.
+    init_method: "random" (default), "nearest_neighbor", or "clarke_wright" — seeds population with heuristic.
+    depot: if None, computed as centroid of points. Used for fitness and heuristic initialization.
     Returns dict with paths.
     """
     if weights is None:
@@ -29,10 +42,20 @@ def run_ga(points: List[Dict[str, Any]],
         out_dir = f"experiments/run_{int(time.time())}"
     os.makedirs(out_dir, exist_ok=True)
 
+    depot = depot or _compute_depot(points)
     ids = [p["id"] for p in points]
+    lookup = representation.build_points_lookup(points)
 
     # init population
     pop = population.generate_random_population(ids, num_vehicles, population_size)
+    if init_method == "nearest_neighbor":
+        seed = initialization.nearest_neighbor_init(points, num_vehicles, depot=depot)
+        if pop:
+            pop[0] = seed
+    elif init_method == "clarke_wright":
+        seed = initialization.clarke_wright_savings(points, num_vehicles, depot=depot)
+        if pop:
+            pop[0] = seed
 
     history = []
     best_solution = None
@@ -41,7 +64,7 @@ def run_ga(points: List[Dict[str, Any]],
     for gen in range(generations):
         fitnesses = []
         for chrom in pop:
-            decoded = representation.decode_chromosome(chrom, representation.build_points_lookup(points))
+            decoded = representation.decode_chromosome(chrom, lookup)
             f = fitness.fitness_for_chromosome(decoded, weights, depot=depot)
             fitnesses.append(f)
 
@@ -85,6 +108,9 @@ def run_ga(points: List[Dict[str, Any]],
             new_pop.append(child)
 
         pop = new_pop
+
+        if on_progress:
+            on_progress(gen + 1, generations)
 
         # checkpoint: save history each generation
         hist_path = os.path.join(out_dir, "history.csv")
