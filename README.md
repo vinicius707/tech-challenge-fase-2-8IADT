@@ -1,10 +1,52 @@
-# Tech Challenge — Fase 2 (Foco: Projeto 2 — Otimização de Rotas Médicas)
+# Tech Challenge — Fase 2 (Projeto 2 — Otimização de Rotas Médicas)
 
-Este repositório documenta a proposta e as orientações para implementar o Projeto 2: otimização de rotas para distribuição de medicamentos e insumos em contexto hospitalar, usando Algoritmos Genéticos (AG) e integração com LLMs para geração de instruções e relatórios.
+Sistema de otimização de rotas para distribuição de medicamentos e insumos em contexto hospitalar, usando Algoritmos Genéticos (AG) e integração com LLMs.
+
+---
+
+## Quickstart
+
+Suba a aplicação em poucos passos:
+
+```bash
+# 1. Instale dependências Python
+python3 -m venv .venv
+source .venv/bin/activate   # Windows: .venv\Scripts\activate
+pip install -r requirements.txt
+
+# 2. Inicie o backend (Terminal 1)
+uvicorn src.api.app:app --reload --port 8000
+
+# 3. Inicie o frontend (Terminal 2)
+cd frontend && npm install && npm run dev
+# alternativa: npm run frontend   (da raiz do projeto)
+```
+
+Acesse **http://localhost:3000** e crie um planejamento de rotas. A API roda em **http://localhost:8000**.
+
+Para respostas em linguagem natural (Q&A e relatórios), defina `OPENAI_API_KEY` antes de iniciar o backend.
+
+---
+
+## Funcionalidades
+
+| Funcionalidade | Descrição |
+|----------------|-----------|
+| **Otimização de rotas** | AG com VRP, prioridades, capacidade e autonomia dos veículos |
+| **Mapa interativo** | Visualização das rotas em HTML (folium) e GeoJSON |
+| **CRUD locais / veículos / entregas** | Cadastro de pontos e configuração via interface |
+| **Instruções para equipe** | Geração de instruções por rota via LLM (motoristas/equipes) |
+| **Q&A em linguagem natural** | Perguntas sobre rotas e entregas em cada job concluído |
+| **Relatórios semanais** | Métricas agregadas e resumo executivo com sugestões de melhoria |
+| **Comparativo GA vs greedy** | Script para avaliar desempenho em relação ao baseline |
+
+---
 
 ## Visão geral
 
-O objetivo é desenvolver um sistema de otimização de rotas (TSP/VRP) adaptado às restrições de um ambiente hospitalar: prioridades de entregas, capacidade dos veículos, autonomia, múltiplos veículos e janelas de tempo, quando aplicável. A solução deve oferecer visualização das rotas e geração de instruções/relatórios em linguagem natural via LLM.
+O objetivo é um sistema de otimização de rotas (TSP/VRP) adaptado às restrições de um ambiente hospitalar: prioridades de entregas, capacidade dos veículos, autonomia e múltiplos veículos. A solução oferece visualização das rotas e geração de instruções/relatórios em linguagem natural via LLM.
+
+---
 
 ## Objetivos específicos (Projeto 2)
 
@@ -16,7 +58,11 @@ O objetivo é desenvolver um sistema de otimização de rotas (TSP/VRP) adaptado
 - Integrar LLM para gerar instruções detalhadas e relatórios de eficiência.
 - Realizar ao menos 3 experimentos variando parâmetros do AG e documentar comparativos.
 
-## Requisitos técnicos (detalhado)
+---
+
+## Detalhamentos técnicos
+
+### Requisitos técnicos (detalhado)
 
 1. Partir do código-base de TSP fornecido e adaptá-lo para o contexto hospitalar.
 2. Implementar operadores genéticos apropriados para sequências de rota (e.g., order crossover, swap mutation).
@@ -105,26 +151,11 @@ docker run --rm -v $(pwd)/experiments:/app/experiments tech-challenge-routes:lat
 
 ## Stack Web (API + Frontend)
 
-Para rodar a interface web (Next.js) e a API:
+Consulte o [Quickstart](#quickstart) no início do documento. Resumo:
 
-**Backend (API FastAPI):**
-```bash
-uvicorn src.api.app:app --reload --port 8000
-```
-
-**Frontend (Next.js):** é obrigatório rodar **de dentro da pasta `frontend`** ou usar o script da raiz:
-
-```bash
-# Opção 1: da raiz do projeto
-npm run frontend
-
-# Opção 2: manualmente
-cd frontend
-npm install   # apenas na primeira vez
-npm run dev
-```
-
-Acesse o frontend em **http://localhost:3000** (ou 3001 se a 3000 estiver em uso). O frontend retorna 404 se o Next.js for iniciado na raiz do projeto em vez de dentro de `frontend/`.
+- **Backend:** `uvicorn src.api.app:app --reload --port 8000`
+- **Frontend:** `cd frontend && npm install && npm run dev`
+- Acesse **http://localhost:3000** (frontend) e **http://localhost:8000** (API)
 
 ## Instalação offline (wheelhouse)
 
@@ -459,46 +490,20 @@ Implementações já concluídas (resumo):
 - Scripts utilitários e de suporte: `scripts/run_local.sh`, `scripts/build_wheelhouse.sh`, `scripts/install_from_wheelhouse.sh`, `scripts/install_system_deps.sh`  
 - Testes básicos e documentação inicial nos arquivos `docs/` e `tests/ga/`.
 
-## Quickstart
+## Execução via CLI (scripts)
 
-1. Instale dependências (venv ou Poetry). Recomenda-se Poetry:
-
-```bash
-poetry install
-poetry shell
-```
-
-Ou com venv/pip:
+Para rodar experimentos e validações sem a interface web:
 
 ```bash
-python3 -m venv .venv
-source .venv/bin/activate
-pip install -r requirements.txt
-```
-
-2. Rodar validações rápidas:
-
-```bash
+# Validações
 PYTHONPATH=. python3 scripts/validate_parse.py
 PYTHONPATH=. python3 scripts/validate_repr.py
-```
 
-3. Rodar um experimento de exemplo (GA curto):
-
-```bash
+# Experimento GA de exemplo
 PYTHONPATH=. python3 scripts/run_ga_example.py
-```
 
-4. Exportar artefatos (geojson, html, results.csv) a partir do diretório do run:
-
-```bash
-PYTHONPATH=. python3 scripts/export_artifacts.py experiments/run_<timestamp>
-```
-
-5. Gerar instruções com LLM (fallback se sem chave):
-
-```bash
-PYTHONPATH=. python3 scripts/generate_instructions.py experiments/run_<timestamp>
+# Comparativo GA vs greedy
+PYTHONPATH=. python3 scripts/run_comparative.py
 ```
 
 ## Artefatos gerados
