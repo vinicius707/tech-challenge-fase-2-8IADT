@@ -57,8 +57,8 @@ def flatten_chromosome(chromosome: List[List[int]]) -> List[int]:
 def order_crossover_ids(parent1_seq: List[int], parent2_seq: List[int]) -> List[int]:
     """Order Crossover (OX) for sequences of IDs."""
     length = len(parent1_seq)
-    if length == 0:
-        return []
+    if length < 2:
+        return parent1_seq[:]
     a = random.randint(0, length - 2)
     b = random.randint(a + 1, length - 1)
     child = [None] * length
