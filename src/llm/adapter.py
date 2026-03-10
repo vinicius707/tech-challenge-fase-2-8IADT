@@ -65,3 +65,82 @@ class LLMAdapter:
         lines.append("Fim das instruções.")
         return "\n".join(lines)
 
+    def generate_report_summary(self, metrics_text: str) -> str:
+        """
+        Generate an executive summary of logistics metrics, including efficiency,
+        time/resource economy, and suggestions for improvement.
+        """
+        if self.provider == "openai" and self.api_key:
+            try:
+                import openai
+                openai.api_key = self.api_key
+                system = (
+                    "Você é um assistente que produz resumos executivos de relatórios logísticos hospitalares. "
+                    "Sua resposta deve incluir: (1) resumo das métricas e eficiência operacional; "
+                    "(2) análise de economia de tempo e recursos; "
+                    "(3) sugestões de melhoria baseadas nos padrões identificados (ex.: rotas longas, "
+                    "subutilização de veículos, picos de demanda). Seja conciso e acionável."
+                )
+                user_prompt = (
+                    "Analise as métricas abaixo e produza um resumo executivo em 3-4 parágrafos, "
+                    "incluindo eficiência, economia de tempo/recursos e sugestões de melhoria:\n\n"
+                ) + metrics_text
+                resp = openai.ChatCompletion.create(
+                    model="gpt-4o-mini" if getattr(openai, "ChatCompletion", None) else "gpt-4o",
+                    messages=[
+                        {"role": "system", "content": system},
+                        {"role": "user", "content": user_prompt}
+                    ],
+                    max_tokens=500,
+                    temperature=0.3,
+                )
+                if "choices" in resp and resp["choices"]:
+                    return resp["choices"][0]["message"]["content"]
+            except Exception:
+                pass
+        return self._fallback_report_summary(metrics_text)
+
+    def _fallback_report_summary(self, metrics_text: str) -> str:
+        return (
+            f"Relatório logístico (modo fallback):\n\n{metrics_text}\n\n"
+            "Resumo: Revise as métricas acima. Sugestões: (1) analise rotas longas e considere "
+            "rebalancear entregas entre veículos; (2) avalie picos de demanda para melhor planejamento; "
+            "(3) monitore utilização de capacidade para otimizar recursos."
+        )
+
+    def answer_question(self, question: str, context: str) -> str:
+        """
+        Answer natural language questions about routes and deliveries using the provided context.
+        """
+        if self.provider == "openai" and self.api_key:
+            try:
+                import openai
+                openai.api_key = self.api_key
+                system = (
+                    "Você é um assistente que responde perguntas sobre rotas de distribuição "
+                    "hospitalar, entregas e planejamento logístico. Use apenas o contexto fornecido. "
+                    "Se a pergunta não puder ser respondida com o contexto, indique isso."
+                )
+                user_prompt = f"Contexto (rotas e entregas):\n{context}\n\nPergunta: {question}"
+                resp = openai.ChatCompletion.create(
+                    model="gpt-4o-mini" if getattr(openai, "ChatCompletion", None) else "gpt-4o",
+                    messages=[
+                        {"role": "system", "content": system},
+                        {"role": "user", "content": user_prompt}
+                    ],
+                    max_tokens=400,
+                    temperature=0.2,
+                )
+                if "choices" in resp and resp["choices"]:
+                    return resp["choices"][0]["message"]["content"]
+            except Exception as e:
+                return f"Erro ao consultar: {e}"
+        return self._fallback_answer(question, context)
+
+    def _fallback_answer(self, question: str, context: str) -> str:
+        return (
+            f"Modo fallback (sem API LLM). Pergunta: {question}\n\n"
+            f"Contexto disponível:\n{context[:500]}...\n\n"
+            "Configure OPENAI_API_KEY para respostas em linguagem natural."
+        )
+
