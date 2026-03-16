@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "address": "local1",
+    "lat": -23.55,
+    "lon": -46.63,
+    "priority": "ALTA",
+    "notes": "",
+    "created_at": 1773099520.4647832
+  },
+  {
+    "id": 2,
+    "address": "local 22",
+    "lat": -23.55,
+    "lon": -46.63,
+    "priority": "ALTA",
+    "notes": "",
+    "created_at": 1773099777.568008
+  }
+]

@@ -1,8 +1,0 @@
-{
-  "name": "tech-challenge-fase-2",
-  "private": true,
-  "scripts": {
-    "frontend": "cd frontend && npm run dev",
-    "frontend:install": "cd frontend && npm install"
-  }
-}

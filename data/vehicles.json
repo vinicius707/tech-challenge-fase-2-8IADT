@@ -1,0 +1,16 @@
+[
+  {
+    "id": 1,
+    "name": "uno",
+    "capacity_kg": 200.0,
+    "autonomy_km": 300.0,
+    "active": true
+  },
+  {
+    "id": 2,
+    "name": "celta",
+    "capacity_kg": 20000.0,
+    "autonomy_km": 350.0,
+    "active": true
+  }
+]

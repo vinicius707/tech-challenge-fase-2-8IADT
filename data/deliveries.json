@@ -1,0 +1,20 @@
+[
+  {
+    "id": 1,
+    "location_id": 1,
+    "priority": "CR\u00cdTICA",
+    "volume_kg": 1000000.0,
+    "notes": "",
+    "created_at": 1773099544.944834,
+    "status": "pendente"
+  },
+  {
+    "id": 2,
+    "location_id": 2,
+    "priority": "ALTA",
+    "volume_kg": 300000.0,
+    "notes": "",
+    "created_at": 1773099820.063613,
+    "status": "pendente"
+  }
+]

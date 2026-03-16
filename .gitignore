@@ -1,0 +1,27 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+.venv/
+.pytest_cache/
+.ipynb_checkpoints/
+experiments/jobs/*/
+experiments/run_*/
+experiments/comparative_run/
+experiments/*.csv
+experiments/jobs.json
+
+# Node/Next.js
+node_modules/
+.next/
+out/
+.vercel
+*.log
+npm-debug.log*
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Cursor/IDE
+.cursor/
