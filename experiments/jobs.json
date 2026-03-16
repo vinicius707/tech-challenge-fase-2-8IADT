@@ -35,5 +35,1047 @@
       "best": "experiments/jobs/0188c593-7b30-4a1d-8358-6db27c8c9d4a/best_solution.csv",
       "routes_geojson": "experiments/jobs/0188c593-7b30-4a1d-8358-6db27c8c9d4a/routes.geojson"
     }
+  },
+  "93368251-b366-4c9f-a566-6e6a5e5cae14": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 3,
+      "population": 50,
+      "generations": 100,
+      "mutation_rate": 0.05,
+      "elitism": 1,
+      "fitness_weights": null
+    },
+    "out_dir": "experiments/jobs/93368251-b366-4c9f-a566-6e6a5e5cae14",
+    "artifacts": {
+      "out_dir": "experiments/jobs/93368251-b366-4c9f-a566-6e6a5e5cae14",
+      "history": "experiments/jobs/93368251-b366-4c9f-a566-6e6a5e5cae14/history.csv",
+      "best": "experiments/jobs/93368251-b366-4c9f-a566-6e6a5e5cae14/best_solution.csv",
+      "routes_geojson": "experiments/jobs/93368251-b366-4c9f-a566-6e6a5e5cae14/routes.geojson"
+    }
+  },
+  "2861db85-73b0-4b92-b475-bebdb45d03cb": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 6,
+      "population": 100,
+      "generations": 100,
+      "mutation_rate": 0.1,
+      "elitism": 2,
+      "fitness_weights": null
+    },
+    "out_dir": "experiments/jobs/2861db85-73b0-4b92-b475-bebdb45d03cb",
+    "artifacts": {
+      "out_dir": "experiments/jobs/2861db85-73b0-4b92-b475-bebdb45d03cb",
+      "history": "experiments/jobs/2861db85-73b0-4b92-b475-bebdb45d03cb/history.csv",
+      "best": "experiments/jobs/2861db85-73b0-4b92-b475-bebdb45d03cb/best_solution.csv",
+      "routes_geojson": "experiments/jobs/2861db85-73b0-4b92-b475-bebdb45d03cb/routes.geojson"
+    }
+  },
+  "e9f393db-178b-4eb4-9db3-671d0625cb51": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 3,
+      "population": 50,
+      "generations": 150,
+      "mutation_rate": 0.3,
+      "elitism": 1,
+      "fitness_weights": null
+    },
+    "out_dir": "experiments/jobs/e9f393db-178b-4eb4-9db3-671d0625cb51",
+    "artifacts": {
+      "out_dir": "experiments/jobs/e9f393db-178b-4eb4-9db3-671d0625cb51",
+      "history": "experiments/jobs/e9f393db-178b-4eb4-9db3-671d0625cb51/history.csv",
+      "best": "experiments/jobs/e9f393db-178b-4eb4-9db3-671d0625cb51/best_solution.csv",
+      "routes_geojson": "experiments/jobs/e9f393db-178b-4eb4-9db3-671d0625cb51/routes.geojson"
+    }
+  },
+  "27f6540f-fe9a-4903-b718-6ef8b696d2ca": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 3,
+      "population": 50,
+      "generations": 100,
+      "mutation_rate": 0.05,
+      "elitism": 1,
+      "fitness_weights": null
+    },
+    "out_dir": "experiments/jobs/27f6540f-fe9a-4903-b718-6ef8b696d2ca",
+    "artifacts": {
+      "out_dir": "experiments/jobs/27f6540f-fe9a-4903-b718-6ef8b696d2ca",
+      "history": "experiments/jobs/27f6540f-fe9a-4903-b718-6ef8b696d2ca/history.csv",
+      "best": "experiments/jobs/27f6540f-fe9a-4903-b718-6ef8b696d2ca/best_solution.csv",
+      "routes_geojson": "experiments/jobs/27f6540f-fe9a-4903-b718-6ef8b696d2ca/routes.geojson"
+    }
+  },
+  "1e6e5d8e-f00b-4259-96c5-8eb53bd62ef4": {
+    "status": "failed",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 3,
+      "population": 50,
+      "generations": 100,
+      "mutation_rate": 0.05,
+      "elitism": 1,
+      "fitness_weights": null,
+      "locations_ids": null,
+      "delivery_ids": [
+        1
+      ],
+      "vehicle_ids": [
+        1
+      ]
+    },
+    "out_dir": "experiments/jobs/1e6e5d8e-f00b-4259-96c5-8eb53bd62ef4",
+    "created_at": 1773099558.373843,
+    "error": "'NoneType' object has no attribute 'get'"
+  },
+  "80877d95-4cd8-4b54-bc48-e57ba5641b35": {
+    "status": "failed",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 3,
+      "population": 50,
+      "generations": 100,
+      "mutation_rate": 0.05,
+      "elitism": 1,
+      "fitness_weights": null,
+      "locations_ids": null,
+      "delivery_ids": [
+        1
+      ],
+      "vehicle_ids": [
+        1
+      ]
+    },
+    "out_dir": "experiments/jobs/80877d95-4cd8-4b54-bc48-e57ba5641b35",
+    "created_at": 1773099606.096082,
+    "error": "'NoneType' object has no attribute 'get'"
+  },
+  "01d9df7a-5989-4454-8f59-6af97317c3a2": {
+    "status": "failed",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 3,
+      "population": 50,
+      "generations": 100,
+      "mutation_rate": 0.05,
+      "elitism": 1,
+      "fitness_weights": null,
+      "locations_ids": null,
+      "delivery_ids": [
+        1
+      ],
+      "vehicle_ids": [
+        1
+      ]
+    },
+    "out_dir": "experiments/jobs/01d9df7a-5989-4454-8f59-6af97317c3a2",
+    "created_at": 1773099673.884726,
+    "error": "empty range in randrange(0, 0)"
+  },
+  "b4c9867f-73cd-42a5-8f4b-485b48f14f23": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 3,
+      "population": 50,
+      "generations": 100,
+      "mutation_rate": 0.05,
+      "elitism": 1,
+      "fitness_weights": null,
+      "locations_ids": null,
+      "delivery_ids": [
+        2
+      ],
+      "vehicle_ids": [
+        2
+      ]
+    },
+    "out_dir": "experiments/jobs/b4c9867f-73cd-42a5-8f4b-485b48f14f23",
+    "created_at": 1773099833.0112078,
+    "artifacts": {
+      "out_dir": "experiments/jobs/b4c9867f-73cd-42a5-8f4b-485b48f14f23",
+      "history": "experiments/jobs/b4c9867f-73cd-42a5-8f4b-485b48f14f23/history.csv",
+      "best": "experiments/jobs/b4c9867f-73cd-42a5-8f4b-485b48f14f23/best_solution.csv",
+      "routes_geojson": "experiments/jobs/b4c9867f-73cd-42a5-8f4b-485b48f14f23/routes.geojson"
+    }
+  },
+  "cf2555b3-32d9-4a3f-b9b2-c622d6d900b9": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 12,
+      "population": 500,
+      "generations": 1000,
+      "mutation_rate": 0.6,
+      "elitism": 1,
+      "fitness_weights": null,
+      "locations_ids": null,
+      "delivery_ids": null,
+      "vehicle_ids": null
+    },
+    "out_dir": "experiments/jobs/cf2555b3-32d9-4a3f-b9b2-c622d6d900b9",
+    "created_at": 1773099893.4027252,
+    "artifacts": {
+      "out_dir": "experiments/jobs/cf2555b3-32d9-4a3f-b9b2-c622d6d900b9",
+      "history": "experiments/jobs/cf2555b3-32d9-4a3f-b9b2-c622d6d900b9/history.csv",
+      "best": "experiments/jobs/cf2555b3-32d9-4a3f-b9b2-c622d6d900b9/best_solution.csv",
+      "routes_geojson": "experiments/jobs/cf2555b3-32d9-4a3f-b9b2-c622d6d900b9/routes.geojson"
+    }
+  },
+  "00d7a5af-4d68-4c1e-8161-0e4b2fbd8b1d": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 3,
+      "population": 50,
+      "generations": 100,
+      "mutation_rate": 0.65,
+      "elitism": 1,
+      "fitness_weights": null,
+      "locations_ids": null,
+      "delivery_ids": [
+        2
+      ],
+      "vehicle_ids": [
+        1
+      ]
+    },
+    "out_dir": "experiments/jobs/00d7a5af-4d68-4c1e-8161-0e4b2fbd8b1d",
+    "created_at": 1773100178.2615192,
+    "artifacts": {
+      "out_dir": "experiments/jobs/00d7a5af-4d68-4c1e-8161-0e4b2fbd8b1d",
+      "history": "experiments/jobs/00d7a5af-4d68-4c1e-8161-0e4b2fbd8b1d/history.csv",
+      "best": "experiments/jobs/00d7a5af-4d68-4c1e-8161-0e4b2fbd8b1d/best_solution.csv",
+      "routes_geojson": "experiments/jobs/00d7a5af-4d68-4c1e-8161-0e4b2fbd8b1d/routes.geojson"
+    }
+  },
+  "1b4226f4-c1bb-4922-97a6-a2bd92300f76": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 1,
+      "population": 50,
+      "generations": 100,
+      "mutation_rate": 0.05,
+      "elitism": 1,
+      "fitness_weights": null,
+      "locations_ids": null,
+      "delivery_ids": null,
+      "vehicle_ids": null
+    },
+    "out_dir": "experiments/jobs/1b4226f4-c1bb-4922-97a6-a2bd92300f76",
+    "created_at": 1773100309.024658,
+    "artifacts": {
+      "out_dir": "experiments/jobs/1b4226f4-c1bb-4922-97a6-a2bd92300f76",
+      "history": "experiments/jobs/1b4226f4-c1bb-4922-97a6-a2bd92300f76/history.csv",
+      "best": "experiments/jobs/1b4226f4-c1bb-4922-97a6-a2bd92300f76/best_solution.csv",
+      "routes_geojson": "experiments/jobs/1b4226f4-c1bb-4922-97a6-a2bd92300f76/routes.geojson"
+    }
+  },
+  "84550a87-d738-470e-a77e-f37248ce95d0": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 3,
+      "population": 50,
+      "generations": 100,
+      "mutation_rate": 0.05,
+      "elitism": 1,
+      "fitness_weights": null,
+      "locations_ids": null,
+      "delivery_ids": [
+        1,
+        2
+      ],
+      "vehicle_ids": [
+        1,
+        2
+      ]
+    },
+    "out_dir": "experiments/jobs/84550a87-d738-470e-a77e-f37248ce95d0",
+    "created_at": 1773100327.53677,
+    "artifacts": {
+      "out_dir": "experiments/jobs/84550a87-d738-470e-a77e-f37248ce95d0",
+      "history": "experiments/jobs/84550a87-d738-470e-a77e-f37248ce95d0/history.csv",
+      "best": "experiments/jobs/84550a87-d738-470e-a77e-f37248ce95d0/best_solution.csv",
+      "routes_geojson": "experiments/jobs/84550a87-d738-470e-a77e-f37248ce95d0/routes.geojson"
+    }
+  },
+  "d64a18f3-ad4f-481c-b76c-585ca696a32c": {
+    "status": "running",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 7,
+      "population": 500,
+      "generations": 10000,
+      "mutation_rate": 0.6,
+      "elitism": 1,
+      "fitness_weights": null,
+      "locations_ids": null,
+      "delivery_ids": null,
+      "vehicle_ids": null
+    },
+    "out_dir": "experiments/jobs/d64a18f3-ad4f-481c-b76c-585ca696a32c",
+    "created_at": 1773100414.071481
+  },
+  "3efb3772-1d81-490a-97be-82867a024ab4": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 3,
+      "population": 5000,
+      "generations": 10000,
+      "mutation_rate": 0.3,
+      "elitism": 1,
+      "fitness_weights": null,
+      "locations_ids": null,
+      "delivery_ids": [
+        1,
+        2
+      ],
+      "vehicle_ids": [
+        1,
+        2
+      ]
+    },
+    "out_dir": "experiments/jobs/3efb3772-1d81-490a-97be-82867a024ab4",
+    "created_at": 1773100597.0272262,
+    "artifacts": {
+      "out_dir": "experiments/jobs/3efb3772-1d81-490a-97be-82867a024ab4",
+      "history": "experiments/jobs/3efb3772-1d81-490a-97be-82867a024ab4/history.csv",
+      "best": "experiments/jobs/3efb3772-1d81-490a-97be-82867a024ab4/best_solution.csv",
+      "routes_geojson": "experiments/jobs/3efb3772-1d81-490a-97be-82867a024ab4/routes.geojson"
+    }
+  },
+  "b1b178ba-eda6-4964-a24f-9597e182e6cd": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 3,
+      "population": 50,
+      "generations": 100,
+      "mutation_rate": 0.05,
+      "elitism": 1,
+      "fitness_weights": null,
+      "locations_ids": null,
+      "delivery_ids": null,
+      "vehicle_ids": null
+    },
+    "out_dir": "experiments/jobs/b1b178ba-eda6-4964-a24f-9597e182e6cd",
+    "created_at": 1773100914.820727,
+    "artifacts": {
+      "out_dir": "experiments/jobs/b1b178ba-eda6-4964-a24f-9597e182e6cd",
+      "history": "experiments/jobs/b1b178ba-eda6-4964-a24f-9597e182e6cd/history.csv",
+      "best": "experiments/jobs/b1b178ba-eda6-4964-a24f-9597e182e6cd/best_solution.csv",
+      "routes_geojson": "experiments/jobs/b1b178ba-eda6-4964-a24f-9597e182e6cd/routes.geojson"
+    }
+  },
+  "31deced6-0b2e-458c-bc0e-6152e3238999": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 3,
+      "population": 50,
+      "generations": 100,
+      "mutation_rate": 0.05,
+      "elitism": 1,
+      "fitness_weights": null,
+      "locations_ids": null,
+      "delivery_ids": null,
+      "vehicle_ids": null
+    },
+    "out_dir": "experiments/jobs/31deced6-0b2e-458c-bc0e-6152e3238999",
+    "created_at": 1773101512.2345128,
+    "artifacts": {
+      "out_dir": "experiments/jobs/31deced6-0b2e-458c-bc0e-6152e3238999",
+      "history": "experiments/jobs/31deced6-0b2e-458c-bc0e-6152e3238999/history.csv",
+      "best": "experiments/jobs/31deced6-0b2e-458c-bc0e-6152e3238999/best_solution.csv",
+      "routes_geojson": "experiments/jobs/31deced6-0b2e-458c-bc0e-6152e3238999/routes.geojson"
+    }
+  },
+  "d47c426a-d38f-4d7b-8597-dae18513ca99": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 2,
+      "population": 10,
+      "generations": 5,
+      "mutation_rate": 0.05,
+      "elitism": 1,
+      "init_method": "random",
+      "fitness_weights": null,
+      "locations_ids": null,
+      "delivery_ids": null,
+      "vehicle_ids": null
+    },
+    "out_dir": "experiments/jobs/d47c426a-d38f-4d7b-8597-dae18513ca99",
+    "created_at": 1773102338.151785,
+    "progress": {
+      "current": 5,
+      "total": 5
+    },
+    "artifacts": {
+      "out_dir": "experiments/jobs/d47c426a-d38f-4d7b-8597-dae18513ca99",
+      "history": "experiments/jobs/d47c426a-d38f-4d7b-8597-dae18513ca99/history.csv",
+      "best": "experiments/jobs/d47c426a-d38f-4d7b-8597-dae18513ca99/best_solution.csv",
+      "vehicle_reports": [
+        {
+          "vehicle_id": 0,
+          "load_kg": 49.0,
+          "stops": [
+            {
+              "id": 1,
+              "endereco": "Recep\u00e7\u00e3o principal"
+            },
+            {
+              "id": 8,
+              "endereco": "Entrega cr\u00edtica - refrigerado"
+            },
+            {
+              "id": 2,
+              "endereco": "Farm\u00e1cia"
+            },
+            {
+              "id": 6,
+              "endereco": "Armaz\u00e9m"
+            },
+            {
+              "id": 3,
+              "endereco": "Laborat\u00f3rio"
+            }
+          ],
+          "distance_km": 6.07
+        },
+        {
+          "vehicle_id": 1,
+          "load_kg": 40.0,
+          "stops": [
+            {
+              "id": 4,
+              "endereco": "UTI - entregar diretamente na portaria"
+            },
+            {
+              "id": 10,
+              "endereco": "Centro de imagens"
+            },
+            {
+              "id": 7,
+              "endereco": "Posto de sa\u00fade"
+            },
+            {
+              "id": 5,
+              "endereco": "Cl\u00ednica pedi\u00e1trica"
+            },
+            {
+              "id": 9,
+              "endereco": "Administra\u00e7\u00e3o"
+            }
+          ],
+          "distance_km": 10.16
+        }
+      ],
+      "routes_geojson": "experiments/jobs/d47c426a-d38f-4d7b-8597-dae18513ca99/routes.geojson"
+    }
+  },
+  "098bbb57-7fb8-420b-a38a-61e2561ef08f": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 6,
+      "population": 50,
+      "generations": 100,
+      "mutation_rate": 0.05,
+      "elitism": 1,
+      "fitness_weights": null,
+      "locations_ids": null,
+      "delivery_ids": null,
+      "vehicle_ids": null
+    },
+    "out_dir": "experiments/jobs/098bbb57-7fb8-420b-a38a-61e2561ef08f",
+    "created_at": 1773102445.436908,
+    "artifacts": {
+      "out_dir": "experiments/jobs/098bbb57-7fb8-420b-a38a-61e2561ef08f",
+      "history": "experiments/jobs/098bbb57-7fb8-420b-a38a-61e2561ef08f/history.csv",
+      "best": "experiments/jobs/098bbb57-7fb8-420b-a38a-61e2561ef08f/best_solution.csv",
+      "routes_geojson": "experiments/jobs/098bbb57-7fb8-420b-a38a-61e2561ef08f/routes.geojson"
+    }
+  },
+  "21c2dd70-e472-4238-bfaf-b092779a5beb": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 11,
+      "population": 50,
+      "generations": 100,
+      "mutation_rate": 0.05,
+      "elitism": 1,
+      "init_method": "random",
+      "fitness_weights": null,
+      "locations_ids": null,
+      "delivery_ids": null,
+      "vehicle_ids": null
+    },
+    "out_dir": "experiments/jobs/21c2dd70-e472-4238-bfaf-b092779a5beb",
+    "created_at": 1773183906.3173409,
+    "progress": {
+      "current": 100,
+      "total": 100
+    },
+    "artifacts": {
+      "out_dir": "experiments/jobs/21c2dd70-e472-4238-bfaf-b092779a5beb",
+      "history": "experiments/jobs/21c2dd70-e472-4238-bfaf-b092779a5beb/history.csv",
+      "best": "experiments/jobs/21c2dd70-e472-4238-bfaf-b092779a5beb/best_solution.csv",
+      "vehicle_reports": [
+        {
+          "vehicle_id": 0,
+          "load_kg": 20.0,
+          "stops": [
+            {
+              "id": 8,
+              "endereco": "Entrega cr\u00edtica - refrigerado"
+            }
+          ],
+          "distance_km": 2.44
+        },
+        {
+          "vehicle_id": 1,
+          "load_kg": 0,
+          "stops": [],
+          "distance_km": 0.0
+        },
+        {
+          "vehicle_id": 2,
+          "load_kg": 7.0,
+          "stops": [
+            {
+              "id": 10,
+              "endereco": "Centro de imagens"
+            }
+          ],
+          "distance_km": 1.73
+        },
+        {
+          "vehicle_id": 3,
+          "load_kg": 5.0,
+          "stops": [
+            {
+              "id": 3,
+              "endereco": "Laborat\u00f3rio"
+            }
+          ],
+          "distance_km": 1.93
+        },
+        {
+          "vehicle_id": 4,
+          "load_kg": 15.0,
+          "stops": [
+            {
+              "id": 4,
+              "endereco": "UTI - entregar diretamente na portaria"
+            }
+          ],
+          "distance_km": 2.42
+        },
+        {
+          "vehicle_id": 5,
+          "load_kg": 4.0,
+          "stops": [
+            {
+              "id": 6,
+              "endereco": "Armaz\u00e9m"
+            }
+          ],
+          "distance_km": 1.36
+        },
+        {
+          "vehicle_id": 6,
+          "load_kg": 12.0,
+          "stops": [
+            {
+              "id": 1,
+              "endereco": "Recep\u00e7\u00e3o principal"
+            }
+          ],
+          "distance_km": 1.27
+        },
+        {
+          "vehicle_id": 7,
+          "load_kg": 6.0,
+          "stops": [
+            {
+              "id": 5,
+              "endereco": "Cl\u00ednica pedi\u00e1trica"
+            }
+          ],
+          "distance_km": 2.72
+        },
+        {
+          "vehicle_id": 8,
+          "load_kg": 12.0,
+          "stops": [
+            {
+              "id": 7,
+              "endereco": "Posto de sa\u00fade"
+            },
+            {
+              "id": 9,
+              "endereco": "Administra\u00e7\u00e3o"
+            }
+          ],
+          "distance_km": 2.84
+        },
+        {
+          "vehicle_id": 9,
+          "load_kg": 8.0,
+          "stops": [
+            {
+              "id": 2,
+              "endereco": "Farm\u00e1cia"
+            }
+          ],
+          "distance_km": 0.82
+        },
+        {
+          "vehicle_id": 10,
+          "load_kg": 0,
+          "stops": [],
+          "distance_km": 0.0
+        }
+      ],
+      "routes_geojson": "experiments/jobs/21c2dd70-e472-4238-bfaf-b092779a5beb/routes.geojson"
+    }
+  },
+  "78bd4d9a-cfe8-41a2-b10d-ea965d1ae420": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 3,
+      "population": 50,
+      "generations": 1000,
+      "mutation_rate": 0.26,
+      "elitism": 1,
+      "init_method": "random",
+      "fitness_weights": null,
+      "locations_ids": null,
+      "delivery_ids": null,
+      "vehicle_ids": null
+    },
+    "out_dir": "experiments/jobs/78bd4d9a-cfe8-41a2-b10d-ea965d1ae420",
+    "created_at": 1773188726.3080509,
+    "progress": {
+      "current": 1000,
+      "total": 1000
+    },
+    "artifacts": {
+      "out_dir": "experiments/jobs/78bd4d9a-cfe8-41a2-b10d-ea965d1ae420",
+      "history": "experiments/jobs/78bd4d9a-cfe8-41a2-b10d-ea965d1ae420/history.csv",
+      "best": "experiments/jobs/78bd4d9a-cfe8-41a2-b10d-ea965d1ae420/best_solution.csv",
+      "vehicle_reports": [
+        {
+          "vehicle_id": 0,
+          "load_kg": 36.0,
+          "stops": [
+            {
+              "id": 8,
+              "endereco": "Entrega cr\u00edtica - refrigerado"
+            },
+            {
+              "id": 10,
+              "endereco": "Centro de imagens"
+            },
+            {
+              "id": 6,
+              "endereco": "Armaz\u00e9m"
+            },
+            {
+              "id": 3,
+              "endereco": "Laborat\u00f3rio"
+            }
+          ],
+          "distance_km": 4.73
+        },
+        {
+          "vehicle_id": 1,
+          "load_kg": 29.0,
+          "stops": [
+            {
+              "id": 4,
+              "endereco": "UTI - entregar diretamente na portaria"
+            },
+            {
+              "id": 5,
+              "endereco": "Cl\u00ednica pedi\u00e1trica"
+            },
+            {
+              "id": 2,
+              "endereco": "Farm\u00e1cia"
+            }
+          ],
+          "distance_km": 4.0
+        },
+        {
+          "vehicle_id": 2,
+          "load_kg": 24.0,
+          "stops": [
+            {
+              "id": 1,
+              "endereco": "Recep\u00e7\u00e3o principal"
+            },
+            {
+              "id": 7,
+              "endereco": "Posto de sa\u00fade"
+            },
+            {
+              "id": 9,
+              "endereco": "Administra\u00e7\u00e3o"
+            }
+          ],
+          "distance_km": 3.96
+        }
+      ],
+      "routes_geojson": "experiments/jobs/78bd4d9a-cfe8-41a2-b10d-ea965d1ae420/routes.geojson"
+    }
+  },
+  "287c7575-dec6-4102-a4c9-91e2fe194c61": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 2,
+      "population": 10,
+      "generations": 5,
+      "mutation_rate": 0.05,
+      "elitism": 1,
+      "init_method": "random",
+      "fitness_weights": null,
+      "locations_ids": null,
+      "delivery_ids": null,
+      "vehicle_ids": null
+    },
+    "out_dir": "experiments/jobs/287c7575-dec6-4102-a4c9-91e2fe194c61",
+    "created_at": 1773698383.903788,
+    "progress": {
+      "current": 5,
+      "total": 5
+    },
+    "artifacts": {
+      "out_dir": "experiments/jobs/287c7575-dec6-4102-a4c9-91e2fe194c61",
+      "history": "experiments/jobs/287c7575-dec6-4102-a4c9-91e2fe194c61/history.csv",
+      "best": "experiments/jobs/287c7575-dec6-4102-a4c9-91e2fe194c61/best_solution.csv",
+      "vehicle_reports": [
+        {
+          "vehicle_id": 0,
+          "load_kg": 48.0,
+          "stops": [
+            {
+              "id": 4,
+              "endereco": "UTI - entregar diretamente na portaria"
+            },
+            {
+              "id": 10,
+              "endereco": "Centro de imagens"
+            },
+            {
+              "id": 1,
+              "endereco": "Recep\u00e7\u00e3o principal"
+            },
+            {
+              "id": 7,
+              "endereco": "Posto de sa\u00fade"
+            },
+            {
+              "id": 3,
+              "endereco": "Laborat\u00f3rio"
+            }
+          ],
+          "distance_km": 6.96
+        },
+        {
+          "vehicle_id": 1,
+          "load_kg": 41.0,
+          "stops": [
+            {
+              "id": 8,
+              "endereco": "Entrega cr\u00edtica - refrigerado"
+            },
+            {
+              "id": 5,
+              "endereco": "Cl\u00ednica pedi\u00e1trica"
+            },
+            {
+              "id": 6,
+              "endereco": "Armaz\u00e9m"
+            },
+            {
+              "id": 9,
+              "endereco": "Administra\u00e7\u00e3o"
+            },
+            {
+              "id": 2,
+              "endereco": "Farm\u00e1cia"
+            }
+          ],
+          "distance_km": 8.45
+        }
+      ],
+      "routes_geojson": "experiments/jobs/287c7575-dec6-4102-a4c9-91e2fe194c61/routes.geojson"
+    }
+  },
+  "cf9edbb4-518c-40b4-bf0c-edc4e2d0acbd": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 2,
+      "population": 10,
+      "generations": 5,
+      "mutation_rate": 0.05,
+      "elitism": 1,
+      "init_method": "random",
+      "fitness_weights": null,
+      "locations_ids": null,
+      "delivery_ids": null,
+      "vehicle_ids": null
+    },
+    "out_dir": "experiments/jobs/cf9edbb4-518c-40b4-bf0c-edc4e2d0acbd",
+    "created_at": 1773698407.8610198,
+    "progress": {
+      "current": 5,
+      "total": 5
+    },
+    "artifacts": {
+      "out_dir": "experiments/jobs/cf9edbb4-518c-40b4-bf0c-edc4e2d0acbd",
+      "history": "experiments/jobs/cf9edbb4-518c-40b4-bf0c-edc4e2d0acbd/history.csv",
+      "best": "experiments/jobs/cf9edbb4-518c-40b4-bf0c-edc4e2d0acbd/best_solution.csv",
+      "vehicle_reports": [
+        {
+          "vehicle_id": 0,
+          "load_kg": 52.0,
+          "stops": [
+            {
+              "id": 8,
+              "endereco": "Entrega cr\u00edtica - refrigerado"
+            },
+            {
+              "id": 2,
+              "endereco": "Farm\u00e1cia"
+            },
+            {
+              "id": 10,
+              "endereco": "Centro de imagens"
+            },
+            {
+              "id": 1,
+              "endereco": "Recep\u00e7\u00e3o principal"
+            },
+            {
+              "id": 3,
+              "endereco": "Laborat\u00f3rio"
+            }
+          ],
+          "distance_km": 6.85
+        },
+        {
+          "vehicle_id": 1,
+          "load_kg": 37.0,
+          "stops": [
+            {
+              "id": 4,
+              "endereco": "UTI - entregar diretamente na portaria"
+            },
+            {
+              "id": 5,
+              "endereco": "Cl\u00ednica pedi\u00e1trica"
+            },
+            {
+              "id": 7,
+              "endereco": "Posto de sa\u00fade"
+            },
+            {
+              "id": 9,
+              "endereco": "Administra\u00e7\u00e3o"
+            },
+            {
+              "id": 6,
+              "endereco": "Armaz\u00e9m"
+            }
+          ],
+          "distance_km": 7.15
+        }
+      ],
+      "routes_geojson": "experiments/jobs/cf9edbb4-518c-40b4-bf0c-edc4e2d0acbd/routes.geojson"
+    }
+  },
+  "4500158f-ca80-4455-8577-ad5a1148b749": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 2,
+      "population": 10,
+      "generations": 5,
+      "mutation_rate": 0.05,
+      "elitism": 1,
+      "init_method": "random",
+      "fitness_weights": null,
+      "locations_ids": null,
+      "delivery_ids": null,
+      "vehicle_ids": null
+    },
+    "out_dir": "experiments/jobs/4500158f-ca80-4455-8577-ad5a1148b749",
+    "created_at": 1773698858.8533251,
+    "progress": {
+      "current": 5,
+      "total": 5
+    },
+    "artifacts": {
+      "out_dir": "experiments/jobs/4500158f-ca80-4455-8577-ad5a1148b749",
+      "history": "experiments/jobs/4500158f-ca80-4455-8577-ad5a1148b749/history.csv",
+      "best": "experiments/jobs/4500158f-ca80-4455-8577-ad5a1148b749/best_solution.csv",
+      "vehicle_reports": [
+        {
+          "vehicle_id": 0,
+          "load_kg": 45.0,
+          "stops": [
+            {
+              "id": 1,
+              "endereco": "Recep\u00e7\u00e3o principal"
+            },
+            {
+              "id": 5,
+              "endereco": "Cl\u00ednica pedi\u00e1trica"
+            },
+            {
+              "id": 4,
+              "endereco": "UTI - entregar diretamente na portaria"
+            },
+            {
+              "id": 10,
+              "endereco": "Centro de imagens"
+            },
+            {
+              "id": 3,
+              "endereco": "Laborat\u00f3rio"
+            }
+          ],
+          "distance_km": 6.04
+        },
+        {
+          "vehicle_id": 1,
+          "load_kg": 44.0,
+          "stops": [
+            {
+              "id": 8,
+              "endereco": "Entrega cr\u00edtica - refrigerado"
+            },
+            {
+              "id": 7,
+              "endereco": "Posto de sa\u00fade"
+            },
+            {
+              "id": 9,
+              "endereco": "Administra\u00e7\u00e3o"
+            },
+            {
+              "id": 6,
+              "endereco": "Armaz\u00e9m"
+            },
+            {
+              "id": 2,
+              "endereco": "Farm\u00e1cia"
+            }
+          ],
+          "distance_km": 6.44
+        }
+      ],
+      "routes_geojson": "experiments/jobs/4500158f-ca80-4455-8577-ad5a1148b749/routes.geojson"
+    }
+  },
+  "6aadd253-3596-4800-873a-5027e022c26f": {
+    "status": "finished",
+    "request": {
+      "instance": "data/instances/hospital_points.csv",
+      "num_vehicles": 2,
+      "population": 10,
+      "generations": 5,
+      "mutation_rate": 0.05,
+      "elitism": 1,
+      "init_method": "random",
+      "fitness_weights": null,
+      "locations_ids": null,
+      "delivery_ids": null,
+      "vehicle_ids": null
+    },
+    "out_dir": "experiments/jobs/6aadd253-3596-4800-873a-5027e022c26f",
+    "created_at": 1773698907.096156,
+    "progress": {
+      "current": 5,
+      "total": 5
+    },
+    "artifacts": {
+      "out_dir": "experiments/jobs/6aadd253-3596-4800-873a-5027e022c26f",
+      "history": "experiments/jobs/6aadd253-3596-4800-873a-5027e022c26f/history.csv",
+      "best": "experiments/jobs/6aadd253-3596-4800-873a-5027e022c26f/best_solution.csv",
+      "vehicle_reports": [
+        {
+          "vehicle_id": 0,
+          "load_kg": 42.0,
+          "stops": [
+            {
+              "id": 4,
+              "endereco": "UTI - entregar diretamente na portaria"
+            },
+            {
+              "id": 1,
+              "endereco": "Recep\u00e7\u00e3o principal"
+            },
+            {
+              "id": 2,
+              "endereco": "Farm\u00e1cia"
+            },
+            {
+              "id": 9,
+              "endereco": "Administra\u00e7\u00e3o"
+            },
+            {
+              "id": 6,
+              "endereco": "Armaz\u00e9m"
+            }
+          ],
+          "distance_km": 6.46
+        },
+        {
+          "vehicle_id": 1,
+          "load_kg": 47.0,
+          "stops": [
+            {
+              "id": 8,
+              "endereco": "Entrega cr\u00edtica - refrigerado"
+            },
+            {
+              "id": 7,
+              "endereco": "Posto de sa\u00fade"
+            },
+            {
+              "id": 10,
+              "endereco": "Centro de imagens"
+            },
+            {
+              "id": 3,
+              "endereco": "Laborat\u00f3rio"
+            },
+            {
+              "id": 5,
+              "endereco": "Cl\u00ednica pedi\u00e1trica"
+            }
+          ],
+          "distance_km": 10.1
+        }
+      ],
+      "routes_geojson": "experiments/jobs/6aadd253-3596-4800-873a-5027e022c26f/routes.geojson"
+    }
   }
 }

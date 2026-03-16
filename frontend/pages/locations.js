@@ -18,6 +18,9 @@ import TableCell from '@mui/material/TableCell'
 import TableHead from '@mui/material/TableHead'
 import TableRow from '@mui/material/TableRow'
 import Alert from '@mui/material/Alert'
+import Paper from '@mui/material/Paper'
+import AddIcon from '@mui/icons-material/Add'
+import Chip from '@mui/material/Chip'
 import { getLocations, postLocation } from '../lib/api'
 
 const fetcher = () => getLocations().then((r) => r.locations || [])
@@ -52,65 +55,87 @@ export default function Locations() {
     }
   }
 
+  const getPriorityColor = (p) => {
+    switch(p) {
+      case 'ALTA': return 'error'
+      case 'MÉDIA': return 'warning'
+      case 'BAIXA': return 'info'
+      default: return 'default'
+    }
+  }
+
   return (
     <Box>
-      <Typography variant="h5" gutterBottom>
-        Endereços
-      </Typography>
-      <Button variant="contained" onClick={() => setOpen(true)} sx={{ mb: 2 }}>
-        Cadastrar local
-      </Button>
-      <Table size="small">
-        <TableHead>
-          <TableRow>
-            <TableCell>ID</TableCell>
-            <TableCell>Endereço</TableCell>
-            <TableCell>Lat/Lon</TableCell>
-            <TableCell>Prioridade</TableCell>
-            <TableCell>Notas</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {locations.map((loc) => (
-            <TableRow key={loc.id}>
-              <TableCell>{loc.id}</TableCell>
-              <TableCell>{loc.address}</TableCell>
-              <TableCell>{loc.lat?.toFixed(4)}, {loc.lon?.toFixed(4)}</TableCell>
-              <TableCell>{loc.priority}</TableCell>
-              <TableCell>{loc.notes}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
-      {locations.length === 0 && (
-        <Typography color="text.secondary" sx={{ mt: 2 }}>
-          Nenhum local cadastrado.
+      <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', mb: 3 }}>
+        <Typography variant="h5" sx={{ fontWeight: 600 }}>
+          Endereços / Hospitais
         </Typography>
-      )}
+        <Button variant="contained" startIcon={<AddIcon />} onClick={() => setOpen(true)}>
+          Novo Local
+        </Button>
+      </Box>
 
-      <Dialog open={open} onClose={() => setOpen(false)}>
-        <DialogTitle>Cadastrar local</DialogTitle>
-        <DialogContent>
-          {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
-          <TextField fullWidth label="Endereço" value={address} onChange={(e) => setAddress(e.target.value)} sx={{ mt: 1, mb: 1 }} />
-          <Box sx={{ display: 'flex', gap: 2, mb: 1 }}>
-            <TextField type="number" label="Lat" value={lat} onChange={(e) => setLat(Number(e.target.value))} />
-            <TextField type="number" label="Lon" value={lon} onChange={(e) => setLon(Number(e.target.value))} />
+      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+        <Table sx={{ minWidth: 650 }}>
+          <TableHead sx={{ bgcolor: 'secondary.main' }}>
+            <TableRow>
+              <TableCell sx={{ color: 'secondary.contrastText', fontWeight: 600 }}>ID</TableCell>
+              <TableCell sx={{ color: 'secondary.contrastText', fontWeight: 600 }}>Endereço</TableCell>
+              <TableCell sx={{ color: 'secondary.contrastText', fontWeight: 600 }}>Lat/Lon</TableCell>
+              <TableCell sx={{ color: 'secondary.contrastText', fontWeight: 600 }}>Prioridade Padrão</TableCell>
+              <TableCell sx={{ color: 'secondary.contrastText', fontWeight: 600 }}>Notas</TableCell>
+            </TableRow>
+          </TableHead>
+          <TableBody>
+            {locations.map((loc) => (
+              <TableRow key={loc.id} hover>
+                <TableCell>{loc.id}</TableCell>
+                <TableCell sx={{ fontWeight: 500 }}>{loc.address}</TableCell>
+                <TableCell sx={{ color: 'text.secondary' }}>{loc.lat?.toFixed(4)}, {loc.lon?.toFixed(4)}</TableCell>
+                <TableCell>
+                  <Chip 
+                    label={loc.priority} 
+                    color={getPriorityColor(loc.priority)} 
+                    size="small" 
+                    variant="outlined"
+                    sx={{ fontWeight: 600 }}
+                  />
+                </TableCell>
+                <TableCell>{loc.notes}</TableCell>
+              </TableRow>
+            ))}
+          </TableBody>
+        </Table>
+        {locations.length === 0 && (
+          <Box sx={{ p: 4, textAlign: 'center' }}>
+            <Typography color="text.secondary">Nenhum local cadastrado.</Typography>
           </Box>
-          <FormControl fullWidth sx={{ mt: 1 }}>
-            <InputLabel>Prioridade</InputLabel>
-            <Select value={priority} label="Prioridade" onChange={(e) => setPriority(e.target.value)}>
-              <MenuItem value="ALTA">ALTA</MenuItem>
-              <MenuItem value="MÉDIA">MÉDIA</MenuItem>
-              <MenuItem value="BAIXA">BAIXA</MenuItem>
+        )}
+      </Paper>
+
+      <Dialog open={open} onClose={() => setOpen(false)} maxWidth="sm" fullWidth>
+        <DialogTitle sx={{ fontWeight: 600 }}>Cadastrar Local</DialogTitle>
+        <DialogContent dividers>
+          {error && <Alert severity="error" sx={{ mb: 2 }}>{error}</Alert>}
+          <TextField fullWidth label="Endereço Completo" value={address} onChange={(e) => setAddress(e.target.value)} sx={{ mt: 1, mb: 3 }} />
+          <Box sx={{ display: 'flex', gap: 2, mb: 3 }}>
+            <TextField type="number" label="Latitude" value={lat} onChange={(e) => setLat(Number(e.target.value))} fullWidth />
+            <TextField type="number" label="Longitude" value={lon} onChange={(e) => setLon(Number(e.target.value))} fullWidth />
+          </Box>
+          <FormControl fullWidth sx={{ mb: 3 }}>
+            <InputLabel>Prioridade Padrão</InputLabel>
+            <Select value={priority} label="Prioridade Padrão" onChange={(e) => setPriority(e.target.value)}>
+              <MenuItem value="ALTA">Alta (Urgência)</MenuItem>
+              <MenuItem value="MÉDIA">Média (Rotina)</MenuItem>
+              <MenuItem value="BAIXA">Baixa (Insumos gerais)</MenuItem>
             </Select>
           </FormControl>
-          <TextField fullWidth label="Notas" value={notes} onChange={(e) => setNotes(e.target.value)} sx={{ mt: 1 }} />
+          <TextField fullWidth label="Observações de Acesso" value={notes} onChange={(e) => setNotes(e.target.value)} multiline rows={2} />
         </DialogContent>
-        <DialogActions>
+        <DialogActions sx={{ p: 2 }}>
           <Button onClick={() => setOpen(false)}>Cancelar</Button>
           <Button variant="contained" onClick={handleSubmit} disabled={loading || !address}>
-            Salvar
+            Salvar Local
           </Button>
         </DialogActions>
       </Dialog>

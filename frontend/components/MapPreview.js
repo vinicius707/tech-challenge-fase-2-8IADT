@@ -21,6 +21,7 @@ export default function MapPreview({ mapUrl }) {
       <iframe
         src={mapUrl}
         title="Mapa de rotas"
+        data-testid="map-iframe"
         style={{ width: '100%', height: '100%', border: '1px solid #ccc' }}
       />
     </Box>

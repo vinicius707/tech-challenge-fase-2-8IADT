@@ -4,6 +4,13 @@ import { axe, toHaveNoViolations } from 'jest-axe'
 import Layout from '../components/Layout'
 import JobCard from '../components/JobCard'
 
+jest.mock('next/router', () => ({
+  useRouter: () => ({
+    pathname: '/',
+    push: jest.fn(),
+  }),
+}))
+
 expect.extend(toHaveNoViolations)
 
 describe('Accessibility', () => {
