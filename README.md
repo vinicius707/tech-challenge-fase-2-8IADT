@@ -19,7 +19,9 @@ uvicorn src.api.app:app --reload --port 8000
 
 # 3. Inicie o frontend (Terminal 2)
 cd frontend && npm install && npm run dev
-# alternativa: npm run frontend   (da raiz do projeto)
+
+# 4. (Opcional) Rode os testes E2E (Terminal 3)
+cd frontend && npx playwright install --with-deps chromium && npm run test:e2e
 ```
 
 Acesse **http://localhost:3000** e crie um planejamento de rotas. A API roda em **http://localhost:8000**.
@@ -33,7 +35,8 @@ Para respostas em linguagem natural (Q&A e relatórios), defina `OPENAI_API_KEY`
 | Funcionalidade | Descrição |
 |----------------|-----------|
 | **Otimização de rotas** | AG com VRP, prioridades, capacidade e autonomia dos veículos |
-| **Mapa interativo** | Visualização das rotas em HTML (folium) e GeoJSON |
+| **Mapa interativo** | Visualização profissional com **zoom dinâmico** (fit bounds), rotas coloridas e trajetos via OSRM |
+| **Interface Inteligente** | Frontend com suporte a **labels de apoio** para parâmetros do AG e UI responsiva |
 | **CRUD locais / veículos / entregas** | Cadastro de pontos e configuração via interface |
 | **Instruções para equipe** | Geração de instruções por rota via LLM (motoristas/equipes) |
 | **Q&A em linguagem natural** | Perguntas sobre rotas e entregas em cada job concluído |
@@ -397,13 +400,19 @@ m.save('route_map.html')
 ## Testes e CI
 
 - Escreva testes unitários para operadores genéticos, função fitness e parsers de instância.
-- Exemplo de comando:
+- **Testes E2E (Playwright)**: Verificação de fluxos de navegação e renderização da Home.
+
+- Exemplo de comandos:
 
 ```bash
-pytest -q
+# Testes Backend/Unitários
+PYTHONPATH=. pytest -q
+
+# Testes Frontend/E2E
+cd frontend && npm run test:e2e
 ```
 
-- Sugestão de CI: GitHub Actions que execute lint (flake8/ruff), testes e workflow de experimentos (opcional).
+- Sugestão de CI: GitHub Actions que execute lint (flake8/ruff), testes unitários e testes E2E automatizados.
 
 ## Deploy / Infraestrutura como Código (opcional)
 
@@ -487,6 +496,9 @@ Implementações já concluídas (resumo):
 - Engine GA e runner de exemplo (`src/ga/engine.py`, `scripts/run_ga_example.py`)  
 - Export e visualização: GeoJSON e mapa HTML (`src/viz/map.py`, `scripts/export_artifacts.py`)  
 - Integração LLM (adapter OpenAI + fallback) e geração de instruções (`src/llm/adapter.py`, `scripts/generate_instructions.py`)  
+- Interface Web completa com suporte a labels de ajuda nos parâmetros do AG (`frontend/pages/create.js`)
+- Melhorias na visualização de mapas com zoom dinâmico e estilos profissionais (`src/viz/map.py`)
+- Suite de testes E2E (`frontend/e2e/`) e unitários (`frontend/__tests__`)
 - Scripts utilitários e de suporte: `scripts/run_local.sh`, `scripts/build_wheelhouse.sh`, `scripts/install_from_wheelhouse.sh`, `scripts/install_system_deps.sh`  
 - Testes básicos e documentação inicial nos arquivos `docs/` e `tests/ga/`.
 
