@@ -71,9 +71,9 @@ def save_geojson(geojson_obj: Dict[str, Any], path: str):
         json.dump(geojson_obj, fh, indent=2, ensure_ascii=False)
 
 
-def generate_simple_html_map(decoded_routes: List[List[Dict[str, Any]]], path: str, center: List[float]=None):
+def generate_simple_html_map(decoded_routes: List[List[Dict[str, Any]]], path: str, center: Optional[List[float]]=None):
     """
-    Generate a minimal interactive map using folium if available; otherwise write a placeholder HTML.
+    Generate an enhanced interactive map with dynamic zoom and clear route visualization.
     """
     try:
         import folium
@@ -82,36 +82,77 @@ def generate_simple_html_map(decoded_routes: List[List[Dict[str, Any]]], path: s
             fh.write("<html><body><h3>Folium não disponível — instale folium para visualizar mapas.</h3></body></html>")
         return
 
-    if center is None:
-        # compute average lat/lon
-        lats = []
-        lons = []
-        for route in decoded_routes:
-            for p in route:
-                lats.append(p['lat'])
-                lons.append(p['lon'])
-        if lats and lons:
-            center = [sum(lats)/len(lats), sum(lons)/len(lons)]
-        else:
-            center = [0, 0]
-
+    all_points = []
     depot = _compute_depot(decoded_routes)
-    m = folium.Map(location=center, zoom_start=12)
-    folium.CircleMarker(location=(depot['lat'], depot['lon']), radius=6, popup="Depósito", color="black", fill=True).add_to(m)
-    colors = ["blue", "green", "red", "orange", "purple", "brown"]
+    all_points.append([depot['lat'], depot['lon']])
+    
+    for route in decoded_routes:
+        for p in route:
+            all_points.append([p['lat'], p['lon']])
+
+    if not all_points:
+        center = [0, 0]
+    elif center is None:
+        center = [sum(p[0] for p in all_points)/len(all_points), sum(p[1] for p in all_points)/len(all_points)]
+
+    # Use a cleaner, professional tile set
+    m = folium.Map(location=center, zoom_start=13, tiles="cartodbpositron")
+
+    # Clearer Depot marker
+    folium.Marker(
+        location=(depot['lat'], depot['lon']),
+        popup="<b>Depósito Central</b>",
+        tooltip="Início/Fim das Rotas",
+        icon=folium.Icon(color="black", icon="warehouse", prefix="fa")
+    ).add_to(m)
+
+    # More vibrant and distinct color palette
+    colors = ["#2563eb", "#16a34a", "#dc2626", "#d97706", "#7c3aed", "#0891b2", "#be185d", "#4f46e5"]
+    
     for vid, route in enumerate(decoded_routes):
+        color = colors[vid % len(colors)]
         full_path = _route_with_depot(route, depot)
         latlons = [(p['lat'], p['lon']) for p in full_path]
+        
         if len(latlons) < 2:
             continue
-        # Use OSRM for road-following path; fallback to straight line
+            
+        # Draw the route line with improved styling
         if route_via_roads:
             road_coords = route_via_roads(latlons)
             draw_coords = road_coords if road_coords else latlons
         else:
             draw_coords = latlons
-        folium.PolyLine(draw_coords, color=colors[vid % len(colors)], weight=4, tooltip=f"Vehicle {vid}").add_to(m)
-        for p in route:
-            folium.CircleMarker(location=(p['lat'], p['lon']), radius=4, popup=f"id:{p['id']} pri:{p.get('priority','')}", color=colors[vid % len(colors)]).add_to(m)
+            
+        folium.PolyLine(
+            draw_coords, 
+            color=color, 
+            weight=5, 
+            opacity=0.75,
+            tooltip=f"Veículo {vid}",
+            popup=f"<b>Rota Veículo {vid}</b><br/>Paradas: {len(route)}"
+        ).add_to(m)
+
+        # Draw stop markers with sequence numbers
+        for idx, p in enumerate(route):
+            folium.CircleMarker(
+                location=(p['lat'], p['lon']),
+                radius=7,
+                popup=f"<b>Parada {idx+1}</b><br/>ID: {p['id']}<br/>Prioridade: {p.get('priority','')}",
+                tooltip=str(idx+1),
+                color=color,
+                fill=True,
+                fill_color="white",
+                fill_opacity=1.0,
+                weight=3
+            ).add_to(m)
+            
+            # Simple text overlay for sequence (optional, might be too busy)
+            # For now, tooltips provide the sequence number clearly.
+
+    # Dynamic zooming: Automatically fit all routes in view
+    if all_points:
+        m.fit_bounds(all_points, padding=(50, 50))
+
     os.makedirs(os.path.dirname(path), exist_ok=True)
     m.save(path)
