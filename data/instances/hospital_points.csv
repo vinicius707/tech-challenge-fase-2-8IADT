@@ -1,0 +1,11 @@
+id,lat,lon,priority,volume,notes
+1,-23.5505,-46.6333,high,12,"Recepção principal"
+2,-23.5560,-46.6250,medium,8,"Farmácia"
+3,-23.5580,-46.6200,low,5,"Laboratório"
+4,-23.5450,-46.6350,high,15,"UTI - entregar diretamente na portaria"
+5,-23.5480,-46.6400,medium,6,"Clínica pediátrica"
+6,-23.5600,-46.6300,low,4,"Armazém"
+7,-23.5520,-46.6180,medium,9,"Posto de saúde"
+8,-23.5650,-46.6280,high,20,"Entrega crítica - refrigerado"
+9,-23.5470,-46.6200,low,3,"Administração"
+10,-23.5590,-46.6350,medium,7,"Centro de imagens"

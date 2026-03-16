@@ -1,0 +1,44 @@
+# Exemplo de configuração para um experimento de otimização de rotas (Projeto 2)
+instance: "data/instances/hospital_points.csv"  # arquivo CSV com colunas: id,lat,lon,priority,volume
+output_dir: "experiments/run_001"
+
+ga:
+  population: 100
+  generations: 200
+  crossover_rate: 0.8
+  mutation_rate: 0.05
+  selection: "tournament"    # opções: tournament, roulette, rank
+  tournament_size: 5
+  elitism: 2
+
+vehicle:
+  num_vehicles: 3
+  capacity: 100.0            # capacidade por veículo (unidades do volume)
+  max_distance: 200.0        # autonomia máxima por veículo (km)
+
+fitness_weights:
+  distance: 0.6
+  priority_penalty: 0.3
+  capacity_penalty: 0.1
+
+constraints:
+  enforce_capacity: true
+  enforce_max_distance: true
+  allow_multi_vehicle: true
+
+experiment:
+  seed: 42
+  save_history: true
+  history_interval: 1        # salvar histórico a cada N gerações
+
+llm:
+  use_llm: true
+  provider: "openai"         # openai, local
+  api_key_env: "OPENAI_API_KEY"
+  prompt_template: "experiments/prompts/route_instructions_prompt.txt"
+
+visualization:
+  generate_map: true
+  map_zoom_start: 12
+  save_geojson: true
+

@@ -1,0 +1,4 @@
+run_id,name,population,generations,mutation_rate,best_fitness,history_path,best_path
+1770496080,exp_pop50_gen20,50,20,0.05,7.856510720512226,experiments/batch_runs/exp_pop50_gen20_1770496080/history.csv,experiments/batch_runs/exp_pop50_gen20_1770496080/best_solution.csv
+1770496080,exp_pop80_gen20,80,20,0.05,7.258405371395433,experiments/batch_runs/exp_pop80_gen20_1770496080/history.csv,experiments/batch_runs/exp_pop80_gen20_1770496080/best_solution.csv
+1770496080,exp_pop50_gen40,50,40,0.02,6.201306503016017,experiments/batch_runs/exp_pop50_gen40_1770496080/history.csv,experiments/batch_runs/exp_pop50_gen40_1770496080/best_solution.csv

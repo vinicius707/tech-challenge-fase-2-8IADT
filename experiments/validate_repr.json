@@ -1,0 +1,55 @@
+{
+  "n_points": 10,
+  "chromosome": [
+    [
+      1,
+      4,
+      7,
+      10
+    ],
+    [
+      2,
+      5,
+      8
+    ],
+    [
+      3,
+      6,
+      9
+    ]
+  ],
+  "decoded_first_route_sample": [
+    {
+      "id": 1,
+      "lat": -23.5505,
+      "lon": -46.6333,
+      "priority": "high",
+      "volume": 12.0,
+      "notes": "Recepção principal"
+    },
+    {
+      "id": 4,
+      "lat": -23.545,
+      "lon": -46.635,
+      "priority": "high",
+      "volume": 15.0,
+      "notes": "UTI - entregar diretamente na portaria"
+    },
+    {
+      "id": 7,
+      "lat": -23.552,
+      "lon": -46.618,
+      "priority": "medium",
+      "volume": 9.0,
+      "notes": "Posto de saúde"
+    },
+    {
+      "id": 10,
+      "lat": -23.559,
+      "lon": -46.635,
+      "priority": "medium",
+      "volume": 7.0,
+      "notes": "Centro de imagens"
+    }
+  ]
+}
