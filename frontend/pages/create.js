@@ -172,6 +172,7 @@ export default function Create() {
               value={population}
               onChange={(e) => setPopulation(Number(e.target.value))}
               inputProps={{ min: 10 }}
+              helperText="Tamanho da população de rotas. Valores maiores aumentam a diversidade e o tempo de cálculo."
             />
             <TextField
               fullWidth
@@ -180,6 +181,7 @@ export default function Create() {
               value={generations}
               onChange={(e) => setGenerations(Number(e.target.value))}
               inputProps={{ min: 1 }}
+              helperText="Número de ciclos evolutivos. Mais gerações refinam a qualidade da rota final."
             />
             <TextField
               fullWidth
@@ -188,6 +190,7 @@ export default function Create() {
               value={mutationRate}
               onChange={(e) => setMutationRate(Number(e.target.value))}
               inputProps={{ min: 0, max: 1, step: 0.01 }}
+              helperText="Chance de mutação (0 a 1). Ajuda a descobrir novas soluções e evitar o estancamento."
             />
             <TextField
               fullWidth
@@ -196,6 +199,7 @@ export default function Create() {
               value={elitism}
               onChange={(e) => setElitism(Number(e.target.value))}
               inputProps={{ min: 0 }}
+              helperText="Número de rotas de elite mantidas para a próxima iteração."
             />
           </Box>
         </AccordionDetails>
