@@ -119,7 +119,7 @@ def update_location(loc_id: int, req: LocationUpdate):
     locations = load_locations()
     for i, loc in enumerate(locations):
         if loc.get("id") == loc_id:
-            upd = {k: v for k, v in req.dict(exclude_unset=True).items() if v is not None}
+            upd = {k: v for k, v in req.model_dump(exclude_unset=True).items() if v is not None}
             locations[i] = {**loc, **upd}
             save_locations(locations)
             return locations[i]
@@ -175,7 +175,7 @@ def update_vehicle(v_id: int, req: VehicleUpdate):
     vehicles = load_vehicles()
     for i, v in enumerate(vehicles):
         if v.get("id") == v_id:
-            upd = {k: v for k, v in req.dict(exclude_unset=True).items() if v is not None}
+            upd = {k: v for k, v in req.model_dump(exclude_unset=True).items() if v is not None}
             vehicles[i] = {**v, **upd}
             save_vehicles(vehicles)
             return vehicles[i]
@@ -400,10 +400,10 @@ def optimize(req: OptimizeRequest, background_tasks: BackgroundTasks):
     job_id = str(uuid.uuid4())
     out_dir = f"experiments/jobs/{job_id}"
     jobs = load_jobs()
-    jobs[job_id] = {"status": "queued", "request": req.dict(), "out_dir": out_dir, "created_at": time.time()}
+    jobs[job_id] = {"status": "queued", "request": req.model_dump(), "out_dir": out_dir, "created_at": time.time()}
     save_jobs(jobs)
     # schedule background run
-    EXECUTOR.submit(run_job, job_id, req.dict(), out_dir)
+    EXECUTOR.submit(run_job, job_id, req.model_dump(), out_dir)
     return {"job_id": job_id, "status": "queued"}
 
 
