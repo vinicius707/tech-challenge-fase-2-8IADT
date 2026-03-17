@@ -20,7 +20,7 @@ ENV PYTHONUNBUFFERED=1
 
 # Minimal runtime deps (keep required system libs for geospatial runtime)
 RUN apt-get update && apt-get install -y --no-install-recommends \
-    gdal-bin libgdal-dev libpq-dev ca-certificates \
+    gdal-bin libgdal-dev libgeos-dev libproj-dev libpq-dev ca-certificates \
   && rm -rf /var/lib/apt/lists/*
 
 WORKDIR /app
@@ -37,5 +37,9 @@ COPY . .
 RUN useradd --create-home appuser && chown -R appuser:appuser /app
 USER appuser
 
-# Default entrypoint (override at runtime)
-CMD ["python", "-m", "src.optimize", "--config", "experiments/configs/experiment_01.yaml"]
+# Expose port (Render sets $PORT, but we'll default to 8000)
+ENV PORT=8000
+EXPOSE 8000
+
+# Start the API server using shell form to expand the $PORT variable
+CMD uvicorn src.api.app:app --host 0.0.0.0 --port ${PORT}
