@@ -28,7 +28,7 @@ import csv
 
 app = FastAPI(title="Tech Challenge - Routes Optimization API")
 
-app.add_middleware(CORSMiddleware, allow_origins=["http://localhost:3000", "http://127.0.0.1:3000"], allow_methods=["*"], allow_headers=["*"])
+app.add_middleware(CORSMiddleware, allow_origins=["*"], allow_methods=["*"], allow_headers=["*"])
 
 JOBS_PATH = "experiments/jobs.json"
 EXPERIMENTS_DIR = "experiments"
