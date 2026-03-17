@@ -16,8 +16,6 @@ import ListItem from '@mui/material/ListItem'
 import ListItemButton from '@mui/material/ListItemButton'
 import ListItemIcon from '@mui/material/ListItemIcon'
 import ListItemText from '@mui/material/ListItemText'
-import InboxIcon from '@mui/icons-material/MoveToInbox'
-import MailIcon from '@mui/icons-material/Mail'
 import { useRouter } from 'next/router'
 import HomeIcon from '@mui/icons-material/Home'
 import RouteIcon from '@mui/icons-material/Route'
@@ -63,7 +61,7 @@ const DrawerHeader = styled('div')(({ theme }) => ({
   ...theme.mixins.toolbar,
 }))
 
-const AppBar = styled(MuiAppBar, {
+const AppBarDesktop = styled(MuiAppBar, {
   shouldForwardProp: (prop) => prop !== 'open',
 })(({ theme, open }) => ({
   zIndex: theme.zIndex.drawer + 1,
@@ -85,7 +83,7 @@ const AppBar = styled(MuiAppBar, {
   }),
 }))
 
-const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
+const DrawerDesktop = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' })(
   ({ theme, open }) => ({
     width: drawerWidth,
     flexShrink: 0,
@@ -109,13 +107,17 @@ const navLinks = [
   { href: '/locations', label: 'Endereços', icon: <LocationOnIcon /> },
   { href: '/vehicles', label: 'Veículos', icon: <DirectionsCarIcon /> },
   { href: '/deliveries', label: 'Encomendas', icon: <LocalShippingIcon /> },
-  { href: '/reports', label: 'Relatórios', icon: <AssessmentIcon /> },
 ]
 
 export default function Layout({ children }) {
   const theme = useTheme()
-  const [open, setOpen] = React.useState(true)
+  const [open, setOpen] = React.useState(true) // Desktop state
+  const [mobileOpen, setMobileOpen] = React.useState(false) // Mobile state
   const router = useRouter()
+
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen)
+  }
 
   const handleDrawerOpen = () => {
     setOpen(true)
@@ -125,10 +127,105 @@ export default function Layout({ children }) {
     setOpen(false)
   }
 
+  const drawerContent = (isDesktop) => (
+    <>
+      <DrawerHeader>
+        <Typography variant="subtitle1" sx={{ flexGrow: 1, ml: 2, fontWeight: 700, color: 'white' }}>
+          Distribuição
+        </Typography>
+        {isDesktop && (
+          <IconButton onClick={handleDrawerClose} sx={{ color: 'white' }} aria-label="close drawer">
+            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
+          </IconButton>
+        )}
+      </DrawerHeader>
+      <Divider sx={{ borderColor: 'rgba(255,255,255,0.1)' }} />
+      <List>
+        {navLinks.map((link) => {
+          const isActive = router.pathname === link.href || (link.href !== '/' && router.pathname.startsWith(link.href))
+          return (
+            <ListItem key={link.href} disablePadding sx={{ display: 'block' }}>
+              <ListItemButton
+                onClick={() => {
+                  router.push(link.href)
+                  if (!isDesktop) setMobileOpen(false)
+                }}
+                sx={{
+                  minHeight: 48,
+                  justifyContent: (isDesktop && !open) ? 'center' : 'initial',
+                  px: 2.5,
+                  backgroundColor: isActive ? 'rgba(255,255,255,0.08)' : 'transparent',
+                  '&:hover': {
+                    backgroundColor: 'rgba(255,255,255,0.12)',
+                  },
+                  borderLeft: isActive ? `4px solid ${theme.palette.primary.main}` : '4px solid transparent',
+                }}
+              >
+                <ListItemIcon
+                  sx={{
+                    minWidth: 0,
+                    mr: (isDesktop && !open) ? 'auto' : 3,
+                    justifyContent: 'center',
+                    color: isActive ? theme.palette.primary.main : 'rgba(255,255,255,0.7)',
+                  }}
+                >
+                  {link.icon}
+                </ListItemIcon>
+                <ListItemText 
+                  primary={link.label} 
+                  sx={{ 
+                    opacity: (isDesktop && !open) ? 0 : 1,
+                    '& span': {
+                      fontWeight: isActive ? 600 : 400,
+                      color: isActive ? 'white' : 'rgba(255,255,255,0.85)'
+                    }
+                  }} 
+                />
+              </ListItemButton>
+            </ListItem>
+          )
+        })}
+      </List>
+    </>
+  )
+
   return (
     <Box sx={{ display: 'flex' }}>
       <CssBaseline />
-      <AppBar position="fixed" open={open}>
+      
+      {/* Mobile AppBar */}
+      <MuiAppBar
+        position="fixed"
+        sx={{
+          display: { xs: 'block', sm: 'none' },
+          backgroundColor: theme.palette.background.paper,
+          color: theme.palette.text.primary,
+          boxShadow: 'none',
+          borderBottom: `1px solid ${theme.palette.divider}`,
+        }}
+      >
+        <Toolbar>
+          <IconButton
+            color="inherit"
+            aria-label="open drawer"
+            edge="start"
+            onClick={handleDrawerToggle}
+            sx={{ mr: 2 }}
+          >
+            <MenuIcon />
+          </IconButton>
+          <Typography variant="h6" noWrap component="div" sx={{ fontWeight: 600 }}>
+            Planejamento Rota
+          </Typography>
+        </Toolbar>
+      </MuiAppBar>
+
+      {/* Desktop AppBar */}
+      <AppBarDesktop 
+        position="fixed" 
+        open={open}
+        sx={{ display: { xs: 'none', sm: 'block' } }}
+      >
         <Toolbar>
           <IconButton
             color="inherit"
@@ -146,62 +243,39 @@ export default function Layout({ children }) {
             Planejamento de Rotas
           </Typography>
         </Toolbar>
-      </AppBar>
-      <Drawer variant="permanent" open={open}>
-        <DrawerHeader>
-          <Typography variant="subtitle1" sx={{ flexGrow: 1, ml: 2, fontWeight: 700, color: 'white' }}>
-            Distribuição
-          </Typography>
-          <IconButton onClick={handleDrawerClose} sx={{ color: 'white' }} aria-label="close drawer">
-            {theme.direction === 'rtl' ? <ChevronRightIcon /> : <ChevronLeftIcon />}
-          </IconButton>
-        </DrawerHeader>
-        <Divider sx={{ borderColor: 'rgba(255,255,255,0.1)' }} />
-        <List>
-          {navLinks.map((link) => {
-            const isActive = router.pathname === link.href || (link.href !== '/' && router.pathname.startsWith(link.href))
-            return (
-              <ListItem key={link.href} disablePadding sx={{ display: 'block' }}>
-                <ListItemButton
-                  onClick={() => router.push(link.href)}
-                  sx={{
-                    minHeight: 48,
-                    justifyContent: open ? 'initial' : 'center',
-                    px: 2.5,
-                    backgroundColor: isActive ? 'rgba(255,255,255,0.08)' : 'transparent',
-                    '&:hover': {
-                      backgroundColor: 'rgba(255,255,255,0.12)',
-                    },
-                    borderLeft: isActive ? `4px solid ${theme.palette.primary.main}` : '4px solid transparent',
-                  }}
-                >
-                  <ListItemIcon
-                    sx={{
-                      minWidth: 0,
-                      mr: open ? 3 : 'auto',
-                      justifyContent: 'center',
-                      color: isActive ? theme.palette.primary.main : 'rgba(255,255,255,0.7)',
-                    }}
-                  >
-                    {link.icon}
-                  </ListItemIcon>
-                  <ListItemText 
-                    primary={link.label} 
-                    sx={{ 
-                      opacity: open ? 1 : 0,
-                      '& span': {
-                        fontWeight: isActive ? 600 : 400,
-                        color: isActive ? 'white' : 'rgba(255,255,255,0.85)'
-                      }
-                    }} 
-                  />
-                </ListItemButton>
-              </ListItem>
-            )
-          })}
-        </List>
-      </Drawer>
-      <Box component="main" sx={{ flexGrow: 1, p: 3, pt: 10 }}>
+      </AppBarDesktop>
+
+      {/* Mobile Drawer */}
+      <MuiDrawer
+        variant="temporary"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true, // Better open performance on mobile.
+        }}
+        sx={{
+          display: { xs: 'block', sm: 'none' },
+          '& .MuiDrawer-paper': { 
+            boxSizing: 'border-box', 
+            width: drawerWidth,
+            backgroundColor: theme.palette.secondary.main,
+            color: theme.palette.secondary.contrastText,
+          },
+        }}
+      >
+        {drawerContent(false)}
+      </MuiDrawer>
+
+      {/* Desktop Drawer */}
+      <DrawerDesktop 
+        variant="permanent" 
+        open={open}
+        sx={{ display: { xs: 'none', sm: 'block' } }}
+      >
+        {drawerContent(true)}
+      </DrawerDesktop>
+
+      <Box component="main" sx={{ flexGrow: 1, p: { xs: 2, sm: 3 }, pt: { xs: 10, sm: 10 }, width: '100%' }}>
         {children}
       </Box>
     </Box>

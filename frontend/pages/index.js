@@ -18,7 +18,7 @@ export default function Home() {
 
   return (
     <Box>
-      <Box sx={{ mb: 6, bgcolor: 'primary.main', color: 'primary.contrastText', p: 5, borderRadius: 2, position: 'relative', overflow: 'hidden' }}>
+      <Box sx={{ mb: 6, bgcolor: 'primary.main', color: 'primary.contrastText', p: { xs: 3, md: 5 }, borderRadius: 2, position: 'relative', overflow: 'hidden' }}>
         <Box sx={{ position: 'relative', zIndex: 1 }}>
           <Typography variant="h3" gutterBottom sx={{ fontWeight: 700 }}>
             Bem-vindo ao Sistema de Distribuição

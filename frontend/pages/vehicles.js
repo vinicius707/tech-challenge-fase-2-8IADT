@@ -58,7 +58,7 @@ export default function Vehicles() {
         </Button>
       </Box>
 
-      <Paper sx={{ width: '100%', overflow: 'hidden' }}>
+      <Paper sx={{ width: '100%', overflowX: 'auto' }}>
         <Table sx={{ minWidth: 650 }}>
           <TableHead sx={{ bgcolor: 'secondary.main' }}>
             <TableRow>
